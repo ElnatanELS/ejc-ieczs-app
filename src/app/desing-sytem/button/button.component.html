@@ -1,0 +1,11 @@
+<button
+class="w-full"
+  [disabled]="isDisabled"
+  mat-flat-button
+  color="primary"
+  (click)="onClick()"
+  [type]="typeButton === '' ? 'button' : typeButton"
+>
+  <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+  <span>{{ text }}</span>
+</button>

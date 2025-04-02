@@ -1,0 +1,11 @@
+<mat-radio-group [formControl]="controlForm">
+  <mat-radio-button
+    class="example-radio-button"
+    *ngFor="let options of options"
+    [value]="options"
+    class="pr-2"
+    color="primary"
+  >
+    {{ options }}
+  </mat-radio-button>
+</mat-radio-group>

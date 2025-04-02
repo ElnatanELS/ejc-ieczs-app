@@ -1,0 +1,31 @@
+<div
+    class=" flex flex-col justify-center items-center  w-full"
+  >
+ <!-- <h1 class="text-2xl md:text-3xl font-bold text-neutral-900">
+      Olá <span class="text-primary">!</span>
+    </h1> -->
+    <h1 class="text-lg md:text-xl lg:text-2xl font-bold text-neutral-900">
+      Valide seus <span class="text-primary_color/50">dados</span>.
+    </h1>
+
+    <form [formGroup]="form" class="w-full">
+      <div class="relative mt-16 w-full" >
+        <eels-input label="Nome" typeInput="text" [controlForm]="form.controls.nome"></eels-input>
+      </div>
+      <div class="relative mt-4 w-full" >
+        <eels-input label="Data de Nascimento" mask="00/00/0000" typeInput="text" [controlForm]="form.controls.data_nasc"></eels-input>
+      </div>
+
+      <eels-progress-bar *ngIf="loading" ></eels-progress-bar>
+      <eels-button text="Validar" [isDisabled]="form.invalid"  (clickEvent)="validate()" ></eels-button>
+
+    </form>
+
+    <a
+      class="mt-3 font-normal text-sm md:text-base text-neutral-900 cursor-pointer w-full"
+      [routerLink]="['/login/sing-in']"
+      >
+      <span class="text-primary_color/50 font-bold">Entrar</span></a
+    >
+
+    </div>

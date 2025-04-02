@@ -1,0 +1,259 @@
+<div
+  class="
+    flex flex-col
+    justify-center
+    items-center
+    lg:items-start lg:flex-row
+    gap-6
+  "
+>
+  <div
+    class="
+      lg:ml-6
+      bg-white
+      w-[300px]
+      h-[300px]
+      rounded
+      shadow
+      flex
+      justify-center
+      items-center
+      mt-24
+      pt-3
+      relative
+      container
+    "
+  >
+    <div class="avatar absolute -top-20 left-1/2 -translate-x-1/2">
+      <img class="w-8 rounded-full" src="assets/img/semImagem.png" />
+    </div>
+    <div class="flex flex-col justify-center items-center">
+      <p class="font-bold text-[#000] text-sm">{{ member?.data?.nome }}</p>
+      <p class="font-bold text-xs items-center flex justify-center gap-1">
+        <mat-icon>room</mat-icon>
+        {{ member?.data?.localidade | uppercase }},
+        {{ member?.data?.uf | uppercase }}
+      </p>
+      <p
+        class="text-xs flex justify-center mt-12 gap-1 items-center text-[#000]"
+      >
+        <mat-icon>church</mat-icon>
+        {{ member?.data?.data_bat_rec }}
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="
+      w-[100%]
+      h-[100%]
+      container
+      bg-white
+      shadow
+      rounded
+      relative
+      mt-4
+      p-3
+    "
+  >
+    <div
+      class="
+        bg-primary_color
+        w-full
+        h-[50px]
+        text-white
+        font-bold
+        text-center
+        pt-4
+        rounded
+      "
+    >
+      CADASTRO
+    </div>
+    <form [formGroup]="formMember">
+      <p class="font-bold text-xs pt-4 px-10 text-center">
+        INFORMAÇÕES PESSOAIS
+      </p>
+      <div class="flex gap-1 flex-col lg:flex-row">
+        <eels-input
+          class="w-full flex-auto"
+          label="Nome"
+          typeInput="text"
+          [controlForm]="formMember.controls.nome"
+        ></eels-input>
+        <eels-select
+          class="w-full flex-auto"
+          label="Estado Cívil"
+          [options]="options"
+          [controlForm]="formMember.controls.estado_civil"
+        ></eels-select>
+      </div>
+      <eels-input
+        class="w-1/2"
+        label="Ocupação"
+        typeInput="text"
+        [controlForm]="formMember.controls.ocupacao"
+      ></eels-input>
+      <div class="flex gap-1">
+        <eels-input
+          class="w-1/2"
+          label="Data de Nascimento"
+          typeInput="text"
+          mask="00/00/0000"
+          [controlForm]="formMember.controls.data_nasc"
+        ></eels-input>
+        <eels-input
+          class="w-1/2"
+          label="Data de Batismo"
+          typeInput="text"
+          mask="00/00/0000"
+          [controlForm]="formMember.controls.data_bat_rec"
+        ></eels-input>
+      </div>
+      <div class="divider"></div>
+      <p class="font-bold text-xs text-center">ENDEREÇO</p>
+      <div class="flex gap-3 flex-col lg:flex-row">
+        <eels-input
+          class="lg:w-1/4"
+          label="CEP"
+          typeInput="text"
+          [controlForm]="formMember.controls.cep"
+          (focusout)="getCep()"
+          [maxL]="'9'"
+          [mask]="'00000-000'"
+        ></eels-input>
+        <eels-input
+          class="lg:w-3/4"
+          label="Logradouro"
+          typeInput="text"
+          [controlForm]="formMember.controls.logradouro"
+        ></eels-input>
+      </div>
+      <div class="flex gap-1 flex-col lg:flex-row">
+        <eels-input
+          class="lg:w-1/3"
+          label="Número"
+          typeInput="text"
+          [controlForm]="formMember.controls.numero"
+        ></eels-input>
+        <eels-input
+          class="lg:w-1/3"
+          label="Bairro"
+          typeInput="text"
+          [controlForm]="formMember.controls.bairro"
+        ></eels-input>
+        <eels-input
+          class="lg:w-1/3"
+          label="Complemento"
+          typeInput="text"
+          [controlForm]="formMember.controls.complemento"
+        ></eels-input>
+      </div>
+      <div class="flex gap-1 flex-col lg:flex-row">
+        <eels-input
+          class="lg:w-1/2"
+          label="Localidade"
+          typeInput="text"
+          [controlForm]="formMember.controls.localidade"
+        ></eels-input>
+        <eels-input
+          class="lg:w-1/2"
+          label="Estado"
+          typeInput="text"
+          [controlForm]="formMember.controls.uf"
+        ></eels-input>
+      </div>
+      <div class="divider"></div>
+      <p class="font-bold text-xs text-center">CONTATO PESSOAL</p>
+      <div class="flex gap-1 lg:flex-row">
+        <eels-input
+          class="w-1/2"
+          label="Celular"
+          typeInput="text"
+          [mask]="'(00) 00000-0000'"
+          [controlForm]="formMember.controls.cel"
+        ></eels-input>
+        <eels-input
+          class="w-1/2"
+          label="Telefone"
+          typeInput="text"
+          [mask]="'(00) 0000-0000'"
+          [controlForm]="formMember.controls.cel2"
+        ></eels-input>
+      </div>
+      <div class="flex flex-col gap-3 lg:flex-row">
+        <eels-input
+          class="lg:w-2/3"
+          label="E-mail"
+          typeInput="text"
+          [controlForm]="formMember.controls.email"
+        ></eels-input>
+        <eels-input
+          class="lg:w-2/3"
+          label="Instagram"
+          typeInput="text"
+          [controlForm]="formMember.controls.instagram"
+        ></eels-input>
+        <eels-input
+          class="lg:w-2/3"
+          label="Facebook"
+          typeInput="text"
+          [controlForm]="formMember.controls.facebook"
+        ></eels-input>
+      </div>
+      <div class="divider"></div>
+      <p class="font-bold text-xs pt-4 px-10 text-center">INFORMAÇÕES EXTRAS</p>
+      <div class="flex gap-1 flex-col lg:flex-row">
+        <eels-input
+          class="lg:w-1/2"
+          label="Contato de Emergência"
+          typeInput="text"
+          [controlForm]="formMember.controls.contato_emer"
+        ></eels-input>
+      </div>
+      <div class="flex gap-1">
+        <eels-input
+          class="w-1/2"
+          label="Tipo de Relação"
+          typeInput="text"
+          [controlForm]="formMember.controls.tipo_de_relacao"
+        ></eels-input>
+        <eels-input
+          class="w-1/2"
+          label="Telefone para Contato"
+          typeInput="text"
+          [mask]="'(00) 00000-0000'"
+          [controlForm]="formMember.controls.tel_contato"
+        ></eels-input>
+      </div>
+      <div *ngIf="!_auth.isLoggedIn">
+        <div class="divider"></div>
+        <p class="font-bold text-xs pt-4 px-10 text-center">SENHA</p>
+        <div class="flex gap-1 flex-col lg:flex-row">
+          <eels-input
+            class="lg:w-1/2"
+            label="Senha"
+            typeInput="password"
+            [password]="true"
+            [controlForm]="formMember.controls.password"
+          ></eels-input>
+          <eels-input
+            class="lg:w-1/2"
+            label="Confirma Senha"
+            typeInput="password"
+            [password]="true"
+            [controlForm]="formMember.controls.password_conf"
+          ></eels-input>
+        </div>
+      </div>
+      <div>
+        <eels-progress-bar *ngIf="loading"></eels-progress-bar>
+        <eels-button
+          text="Entrar"
+          typeButton="submit"
+          (clickEvent)="onSubmit()"
+        ></eels-button>
+      </div>
+    </form>
+  </div>
+</div>

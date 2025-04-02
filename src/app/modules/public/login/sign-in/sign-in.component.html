@@ -1,0 +1,40 @@
+<div
+    class=" flex flex-col justify-center items-center  w-full"
+  >
+ <!-- <h1 class="text-2xl md:text-3xl font-bold text-neutral-900">
+      Olá <span class="text-primary">!</span>
+    </h1>
+    <h1 class="text-lg md:text-xl lg:text-2xl font-bold text-neutral-900">
+      Faça login e <span class="text-primary">junte-se a nós</span>.
+    </h1> -->
+
+    <form class="w-full">
+      <div class="relative mt-16 w-full" >
+        <eels-input label="E-mail" typeInput="e-mail" [controlForm]="form.controls.email"></eels-input>
+      </div>
+      <div class="relative mt-4 w-full" >
+        <eels-input
+        label="Senha"
+        typeInput="password"
+        [controlForm]="form.controls.password"
+      ></eels-input>
+      </div>
+
+      <eels-progress-bar *ngIf="loading" ></eels-progress-bar>
+      <eels-button text="Entrar" [isDisabled]="form.invalid" (clickEvent)="redirectToHome()"></eels-button>
+
+    </form>
+
+    <a
+      class="mt-3 font-normal text-sm md:text-base text-neutral-900 cursor-pointer w-full"
+      [routerLink]="['/login/forget-password']"
+      >
+      <span class="text-primary_color/50 font-bold">Esqueceu a senha?</span></a
+    >
+    <a
+      class=" font-normal text-sm md:text-base text-neutral-900 cursor-pointer w-full"
+      [routerLink]="['/login/first-access']"
+      >Primeiro Acesso?
+      <span class="text-primary_color/50 font-bold">Valide aqui</span></a
+    >
+    </div>

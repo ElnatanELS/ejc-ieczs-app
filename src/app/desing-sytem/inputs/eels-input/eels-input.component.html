@@ -1,0 +1,22 @@
+<mat-form-field
+  class="w-full caret-darkverde md:caret-darkverde"
+  appearance="outline"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    class="caret-darkverde md:caret-darkverde"
+    matInput
+    [formControl]="controlForm"
+    [maxlength]="maxL"
+    [minlength]="minL"
+    [type]='typeInput'
+    [mask]="mask"
+  />
+  <mat-icon matSuffix>{{ icon }}</mat-icon>
+  <button mat-icon-button matSuffix *ngIf="password "  (click)="hide = !hide;changeType()" >
+    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+
+
+
+</mat-form-field>

@@ -1,0 +1,88 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@angular/material/theming";
+@include mat-core();
+$my-app-primary: mat-palette($mat-blue-grey);
+$my-app-accent: mat-palette($mat-pink, 500, 900, A100);
+$my-app-warn: mat-palette($mat-deep-orange);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Snackbar
+/* ------------------------------------------------------------------------- */
+
+/* Info */
+// .snackbar-type-fill-info {
+//   @apply bg-gray-600;
+// }
+
+// /* Success */
+// .snackbar-type-fill-success {
+//   @apply bg-green-600;
+// }
+
+// /* Error */
+// .snackbar-type-fill-error {
+//   @apply bg-red-600;
+// }
+
+// .snackbar-type-fill-info, .snackbar-type-fill-success, .snackbar-type-fill-error {
+//   @apply text-white;
+// }
+
+// /* Appearance Outline: */
+// /* Info */
+// .snackbar-type-outline-info {
+//   @apply bg-gray-100 ring-1 ring-gray-400 ring-inset;
+//   @apply text-gray-700;
+// }
+
+// /* Success */
+// .snackbar-type-outline-success {
+//   @apply bg-green-50 ring-1 ring-green-400 ring-inset;
+//   @apply text-green-700;
+// }
+
+// /* Error */
+// .snackbar-type-outline-error {
+//   @apply bg-red-50 ring-1 ring-red-400 ring-inset;
+//   @apply text-red-700;
+// }
+
+// /* Appearance Soft: */
+// /* Info */
+// .snackbar-type-soft-info {
+//   @apply bg-gray-100;
+//   @apply text-gray-700;
+// }
+
+/* Success */
+.snackbar-type-soft-success {
+  @apply bg-primary_color;
+}
+
+/* Error */
+.snackbar-type-soft-error {
+  @apply bg-danger-600;
+  @apply text-white;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
