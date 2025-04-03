@@ -26,6 +26,7 @@
     "types": [
       "jest"
     ],
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

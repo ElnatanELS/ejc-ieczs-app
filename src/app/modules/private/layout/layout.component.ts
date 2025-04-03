@@ -12,7 +12,7 @@ import { Collapse, Dropdown, Sidenav, initTE } from 'tw-elements';
 export class LayoutComponent implements OnInit {
   constructor(private _router:Router, public _auth: AuthService) {}
 
-  packageJsonInfo = require('package.json');
+  // packageJsonInfo = require('package.json');
 
   isLogin = this._auth.isLoggedIn
 
