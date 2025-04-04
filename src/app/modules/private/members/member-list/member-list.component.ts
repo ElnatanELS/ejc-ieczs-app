@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RegistrationService } from 'src/app/modules/public/registration/registration.service';
 export interface MemberModel {
   id: string;
   nome: string;
@@ -47,7 +48,12 @@ export class MemberListComponent implements OnInit {
 
 
 
-  constructor() {}
+  constructor(private _registrationService:RegistrationService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+     this._registrationService.read().subscribe((res: any) => {
+      console.log(res);
+      this.dataSource.items = res;
+    });
+  }
 }

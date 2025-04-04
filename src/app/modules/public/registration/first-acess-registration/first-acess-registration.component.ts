@@ -13,7 +13,7 @@ import { RegistrationService } from '../registration.service';
 })
 export class FirstAcessRegistrationComponent implements OnInit {
   hasCpf = false;
-  buttonText = 'Validar CPF';
+  buttonText = 'Validar Inscrição';
   buttonText2 = 'Fazer Inscrição';
   constructor(
     private _formBuilder: FormBuilder,
@@ -50,29 +50,35 @@ export class FirstAcessRegistrationComponent implements OnInit {
         .subscribe((res: any) => {
           console.log(res);
 
-          this.hasCpf = true;
 
-          if (res[0]?.payload.doc.data().stt === 2) {
-            this._snackBarService.openSnackBar(
-              ' já validado',
-              'success'
-            );
-            this.router.navigate(['login']);
-          } else {
-
-            if (res.length === 0 ) {
-              this._snackBarService.openSnackBar(
-                'Menbro não encontrado',
-                'error'
-              );
-            }
+          if (res[0]) {
 
             this._localStore.set('USER', {
-              id: res[0]?.payload.doc.id,
-              data: res[0]?.payload.doc.data(),
+              id: res[0]?.id,
+              data: res[0],
             });
+            console.log(res[0]);
 
-            this.router.navigate(['new-member']);
+            if (res[0]?.stt == 2) {
+              this.router.navigate(['/inscricao/confirmacao']);
+
+            }
+            if (res[0]?.stt == 1) {
+              this.router.navigate(['/inscricao/pagamento']);
+
+            }
+          } else {
+            this.hasCpf = true;
+
+            // if (res.length === 0 ) {
+            //   this._snackBarService.openSnackBar(
+            //     'Menbro não encontrado',
+            //     'error'
+            //   );
+            // }
+
+
+            // this.router.navigate(['new-member']);
           }
 
           this.loading = false;
@@ -84,13 +90,15 @@ export class FirstAcessRegistrationComponent implements OnInit {
     this.loading = true;
     if (this.form.valid) {
       this._registrationService
-        .create({
+        .addItem({
           ...this.form.value,
-          yearCreated: new Date().getFullYear().toString(),
+          yearCreated: new Date().toString(),
           cpf: String(this.form.controls.cpf.value).trim(),
           stt: 1,
         })
-        .then(() => {
+        .subscribe((res) => {
+          console.log('resd',res);
+
           this._snackBarService.openSnackBar(
             'Inscrição feita com sucesso',
             'success'
@@ -98,10 +106,7 @@ export class FirstAcessRegistrationComponent implements OnInit {
           // this.router.navigate(['login']);
           this.loading = false;
         })
-        .catch((error) => {
-          this._snackBarService.openSnackBar('Erro ao criar menbro', 'error');
-          this.loading = false;
-        });
+
     }
   }
 }
