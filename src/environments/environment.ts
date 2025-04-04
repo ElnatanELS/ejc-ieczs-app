@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyCRlYsVgUWtoWWE-NCrUFi2utQxISaOuYA",
-    authDomain: "iec-zonasul-app.firebaseapp.com",
-    databaseURL: "https://iec-zonasul-app-default-rtdb.firebaseio.com",
-    projectId: "iec-zonasul-app",
-    storageBucket: "iec-zonasul-app.appspot.com",
-    messagingSenderId: "847309601690",
-    appId: "1:847309601690:web:0df77f14aab4299afbd823",
-    measurementId: "G-M0P0PTKMVB"
-  }
+    apiKey: "AIzaSyCH6ZLFkbAUtjfKrD81B7-HQYCnBL8Q2OQ",
+  authDomain: "ejc-ieczs-app.firebaseapp.com",
+  databaseURL: "https://ejc-ieczs-app-default-rtdb.firebaseio.com",
+  projectId: "ejc-ieczs-app",
+  storageBucket: "ejc-ieczs-app.firebasestorage.app",
+  messagingSenderId: "134539611702",
+  appId: "1:134539611702:web:9767f047d8e88c14d49297",
+  measurementId: "G-LJHFB3LMVB"
+  },
 };
 
 /*

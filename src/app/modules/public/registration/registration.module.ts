@@ -8,6 +8,11 @@ import { EelsButtonModule } from 'src/app/desing-sytem/button/eels-button.module
 import { EelsInputModule } from 'src/app/desing-sytem/inputs/eels-input/eels-input.module';
 import { EelsProgressBarModule } from 'src/app/desing-sytem/progress-bar/eels-progress-bar.module';
 import { FirstAcessRegistrationComponent } from './first-acess-registration/first-acess-registration.component';
+import { EelsRadioModule } from 'src/app/desing-sytem/inputs/eels-radio/eels-radio.module';
+import { RegistrationService } from './registration.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service';
+import { PaymentComponent } from './payment/payment.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
 
@@ -16,10 +21,12 @@ import { FirstAcessRegistrationComponent } from './first-acess-registration/firs
     RegistrationRoutingModule,
     EelsInputModule,
     EelsButtonModule,
+    EelsRadioModule,
     ReactiveFormsModule,
     MatSnackBarModule,
     EelsProgressBarModule,
   ],
-  declarations: [RegistrationComponent, FirstAcessRegistrationComponent],
+  declarations: [RegistrationComponent, FirstAcessRegistrationComponent, PaymentComponent, ConfirmationComponent],
+  providers: [RegistrationService,SnackbarService],
 })
 export class RegistrationModule {}

@@ -10,6 +10,7 @@
     [maxlength]="maxL"
     [minlength]="minL"
     [type]='typeInput'
+    [mask]="mask"
   />
   <mat-icon matSuffix>{{ icon }}</mat-icon>
   <button mat-icon-button matSuffix *ngIf="password "  (click)="hide = !hide;changeType()" >

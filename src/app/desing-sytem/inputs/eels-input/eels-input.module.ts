@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   imports: [
@@ -13,9 +14,11 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
-    // NgxMaskModule.forRoot(),
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   declarations: [EelsInputComponent],
+  providers: [provideNgxMask()],
 
   exports: [EelsInputComponent],
 })
