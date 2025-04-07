@@ -1,0 +1,6 @@
+<ng-container>
+
+  <th *ngFor="let column of columns; let i = index" [ngClass]="i == 0 ? 'min-w-[20px]':'min-w-auto'">{{column}}</th>
+
+  <th class="w-[60px]"></th>
+</ng-container>

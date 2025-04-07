@@ -16,44 +16,58 @@ export interface MemberModel {
 })
 export class MemberListComponent implements OnInit {
   columns = {
-    avatar: '',
-    nome: 'Nome',
-    contato: 'Contato',
-    dataBatismo: 'Data de Batismo',
+    avatar:'',
+    numeroInscricao: 'Número de Inscrição',
+    cracha: 'Crachá',
+    equipe: 'Equipe',
     stt: 'Status',
-    actions: '',
   };
 
   dataSource: any = {
     items: [
       {
-        avatar: '1',
-        nome: 'Pedro',
-        contato: '(83)99145-4545',
-        dataBatismo: '03/03/2003',
-        stt: '2',
-        actions: '',
+        avatar: {
+          nome: 'Nome',
+          cel: '8888888888',
+
+        },
+        cracha: 'Crachá',
+        stt: 'Status',
+        equipe: 'Equipe',
       },
       {
-        avatar: '1',
-        nome: 'Pedro',
-        contato: '(83)99145-4545',
-        dataBatismo: '03/03/2003',
-        stt: '1',
-        actions: '',
+        avatar: {
+          nome: 'Nome',
+          cel: '8888888888',
+
+        },
+        cracha: 'Crachá',
+        stt: 'Status',
+        equipe: 'Equipe',
       },
     ],
   };
 
-
-
-
-  constructor(private _registrationService:RegistrationService) {}
+  constructor(private _registrationService: RegistrationService) {}
 
   ngOnInit() {
-     this._registrationService.read().subscribe((res: any) => {
+    this._registrationService.read().subscribe((res: any) => {
       console.log(res);
-      this.dataSource.items = res;
+      this.dataSource.items = res.map((item: any) => {
+        return {
+          numeroInscricao: item.numeroInscricao,
+          avatar: {
+            nome: item.nome,
+            cel: item.contato,
+          },
+          cracha: item.cracha,
+          equipe: item.equipe,
+          stt: item.stt,
+        };
+      });
+      // this.dataSource.items = res;
+      console.log( this.dataSource.items);
+
     });
   }
 }

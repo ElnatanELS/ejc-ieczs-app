@@ -1,116 +1,41 @@
-<table
-  mat-table
-  class="w-full relative z[1] overflow-auto text-start"
-  matSort
-  [dataSource]="dataSource?.items"
-  (matSortChange)="handelSort($event)"
->
-  <ng-container
-    [matColumnDef]="column"
-    *ngFor="let column of displayToColumns; let i = index"
-  >
-    <th
-      class="text-start font-semibold text-sm text-darkverde"
-      *matHeaderCellDef
-      mat-sort-header
-      [disabled]="column === 'actions' || column === 'avatar' || sort"
-    >
-      {{ column !== "actions" ? columns[column] : "" | uppercase}}
-    </th>
-    <td mat-cell *matCellDef="let element">
-      <div *ngIf="column !== 'actions' && !column.includes('avatar')  && !column.includes('stt')" class="td">
-        <span class="px-1">
-          {{ element[column] }}
-        </span>
-      </div>
-
-      <div *ngIf="column.includes('avatar')" class="p-1 ">
-          <img
-          [src]="element[column]=== '' ? 'Não validado' : '../../../../../assets/img/logo-preto.png'"
-          class="h-12 w-12 bg-white rounded-full border"
-          alt="..."
-        />
-      </div>
-      <div *ngIf="column.includes('stt')" class="p-1 ">
-
-        <mat-icon class="text-xs text-green-500 " [ngClass]="{'text-green-500': element[column] === '2', 'text-red-500': element[column] === '1'}">circle</mat-icon> {{element[column]=== "1" ? 'Não validado' : ' Validado'}}
-      </div>
-      <div *ngIf="column === 'actions'" class="text-right">
-        <div class="dropdown dropdown-left dropdown-end items-end">
-          <label
-            tabindex="0"
-            class="btn m-1 bg-white hover:bg-white hover:border-white border-white"
-            ><mat-icon class="text-darkverde">more_vert</mat-icon></label
-          >
-          <ul
-            tabindex="0"
-            class="dropdown-content menu bg-white p-2 shadow rounded-box w-52"
-          >
-            <!-- Actions -->
-            <li>
-              <a
-                *ngIf="actions.edit"
-                class="hidden-arrow flex items-center secondary-300 space-nowrap transition duration-150 ease-in-out motion-reduce:transition-none rounded-md border-2 p-1 mx-1 border-white"
-                role="button"
-                (click)="editButton(element)"
-              >
-                <mat-icon class="text-darkverde">edit</mat-icon>Editar
-              </a>
-            </li>
-            <li>
-              <a
-                *ngIf="actions.view"
-                class="hidden-arrow flex items-center secondary-300 space-nowrap transition duration-150 ease-in-out motion-reduce:transition-none border-white rounded-md border-2 p-1 mx-1"
-                role="button"
-                (click)="viewButton(element)"
-              >
-                <mat-icon class="text-darkverde"> visibility </mat-icon
-                >Visualizar
-              </a>
-            </li>
-            <li>
-              <a
-                *ngIf="actions.delete"
-                class="hidden-arrow flex items-center secondary-300 space-nowrap transition duration-150 ease-in-out motion-reduce:transition-none rounded-md border-2 p-1 mx-1 border-white"
-                role="button"
-                (click)="deleteButton(element)"
-              >
-                <mat-icon class="text-darkverde">delete</mat-icon>Deletar
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </td>
-  </ng-container>
-
-  <ng-container
-    *ngIf="dataSource?.items?.length === 0"
-    matColumnDef="disclaimer"
-  >
-    <td mat-footer-cell *matFooterCellDef class="text-center" colspan="100%">
-      Não há registros
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayToColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayToColumns"></tr>
-  <div *ngIf="dataSource?.items?.length === 0">
-    <tr
-      mat-footer-row
-      *matFooterRowDef="['disclaimer']"
-      class="example-second-footer-row"
-    ></tr>
+<!-- <div class="mb-4 flex justify-between">
+  <div class="inline-block">
+    <h3 class="text-foreground font-semibold">Team Members</h3>
+    <div class="text-primary_color space-x-1 text-xs font-medium">
+      <a href="" class="hover:text-primary">All Members:</a>
+      <span class="text-foreground">49,053</span>
+    </div>
   </div>
-</table>
-<mat-paginator
-  *ngIf="paginator"
-  class="mt-6"
-  [length]="dataSource.total"
-  [pageIndex]="dataSource.page - 1"
-  (page)="handelPagination($event)"
-  showFirstLastButtons="true"
-  [pageSizeOptions]="[5, 10, 20]"
-></mat-paginator>
+  <div class="inline-block space-x-4">
+    <button
+      class="bg-primary_color text-primary_color hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+      Import CSV
+    </button>
+    <button class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+      Add Member
+    </button>
+  </div>
+</div> -->
 
+<div class=" bg-white flex min-w-full flex-col rounded-xl  p-2">
+  <app-table-action></app-table-action>
+  <div
+    class="scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary_color grow overflow-x-auto px-5">
+    <table
+      class="text-primary_color table w-full table-auto border-collapse border-0 text-left align-middle leading-5">
+      <thead class="border-primary_color/20 text-primary_color  text-xs">
+        <tr  >
+          <app-table-header class="contents" [columns]="displayToColumns"></app-table-header>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hover:bg-card/50" *ngFor="let user of this.dataSource.items" >
+          <app-table-row [user]="filtrado(user)"  class="contents"></app-table-row>
 
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <app-table-footer></app-table-footer>
+</div>
