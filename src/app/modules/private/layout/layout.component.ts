@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/auth/auth.service';
-// Initialization for ES Users
-import { Collapse, Dropdown, Sidenav, initTE } from 'tw-elements';
+import { Event, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { FooterComponent } from './components/footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss'],
+  styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  constructor(private _router:Router, public _auth: AuthService) {}
+  private mainContent: HTMLElement | null = null;
 
-  // packageJsonInfo = require('package.json');
-
-  isLogin = this._auth.isLoggedIn
-
-  ngOnInit(): void {
-    initTE({ Collapse, Dropdown, Sidenav });
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.mainContent) {
+          this.mainContent!.scrollTop = 0;
+        }
+      }
+    });
   }
 
-
-  redirectToLogin(){
-    this._auth.SignOut()
+  ngOnInit(): void {
+    this.mainContent = document.getElementById('main-content');
   }
 }

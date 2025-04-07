@@ -5,7 +5,7 @@ module.exports = {
     "./src/**/*.{html,js}",
     "./node_modules/tw-elements/dist/js/**/*.js",
   ],
-  plugins: [require("daisyui"), require("tw-elements/dist/plugin.cjs")],
+  plugins: [require("daisyui"), require("tw-elements/dist/plugin.cjs"),require('tailwind-scrollbar')],
   darkMode: "class",
   theme: {
     colors: {
