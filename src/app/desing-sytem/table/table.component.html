@@ -30,7 +30,7 @@
       </thead>
       <tbody>
         <tr class="hover:bg-card/50" *ngFor="let user of this.dataSource.items" >
-          <app-table-row [user]="filtrado(user)"  class="contents"></app-table-row>
+          <app-table-row [user]="filtrado(user)" (userSelected)="viewButton($event)" class="contents"></app-table-row>
 
         </tr>
 

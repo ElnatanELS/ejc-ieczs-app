@@ -8,9 +8,10 @@ import { TableModule } from '../../../../desing-sytem/table/table.module';
 import { WrapperModule } from 'src/app/shared/components/wrapper/wrapper.module';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 
 @NgModule({
-  declarations: [MemberListComponent],
+  declarations: [MemberListComponent, ModalComponent],
   imports: [
     CommonModule,
     EelsInputModule,
@@ -19,6 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     WrapperModule,
     TableModule,
+
+    // EelsTableModule,
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: MemberListComponent },
     ]),

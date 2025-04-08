@@ -13,6 +13,7 @@ import { RegistrationService } from './registration.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service';
 import { PaymentComponent } from './payment/payment.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { EelsSelectModule } from "../../../desing-sytem/inputs/eels-select/eels-select.module";
 
 @NgModule({
 
@@ -22,10 +23,12 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
     EelsInputModule,
     EelsButtonModule,
     EelsRadioModule,
+    EelsSelectModule,
     ReactiveFormsModule,
     MatSnackBarModule,
     EelsProgressBarModule,
-  ],
+    EelsSelectModule
+],
   declarations: [RegistrationComponent, FirstAcessRegistrationComponent, PaymentComponent, ConfirmationComponent],
   providers: [RegistrationService,SnackbarService],
 })

@@ -1,5 +1,5 @@
 <div class="flex flex-wrap items-center justify-between gap-2 py-3 px-5">
-  <h3 class="text-muted-foreground text-sm font-medium">Showing 08 of 100 users</h3>
+  <h3 class="text-muted-foreground text-sm font-medium"></h3>
   <div class="flex flex-wrap gap-2">
     <div class="flex">
       <label class="text-muted-foreground relative">
@@ -9,13 +9,13 @@
         <input
           name="search"
           class="py-2 pl-8 pr-2"
-          placeholder="Search users"
+          placeholder="Pesquisar"
           type="text"
           value=""
           (input)="onSearchChange($event)" />
       </label>
     </div>
-    <div class="flex flex-wrap gap-2.5">
+    <!-- <div class="flex flex-wrap gap-2.5">
       <select name="status" class="text-muted-foreground w-28! p-2" (change)="onStatusChange($event)">
         <option value="">All</option>
         <option value="1">Active</option>
@@ -26,6 +26,6 @@
         <option value="1">Newest</option>
         <option value="2">Oldest</option>
       </select>
-    </div>
+    </div> -->
   </div>
 </div>

@@ -31,6 +31,7 @@ export class FirstAcessRegistrationComponent implements OnInit {
     sexo: [''],
     igreja: [''],
     cel: [''],
+    equipe: [''],
   });
 
   loading = false;

@@ -50,8 +50,17 @@
         ></eels-input>
       </div>
       <div class="relative mt-2 w-full">
+        <eels-select
+          label="Equipe"
+          [options]="[{},{display:'Bandinha',id:'Bandinha'}, {display:'Lanchinho',id:'Lanchinho'},{display:'Boa Vontande',id:'Boa Vontande'},]"
+          typeInput="text"
+          [controlForm]="form.controls.equipe"
+        ></eels-select>
+      </div>
+      <div class="relative mt-2 w-full">
         <eels-input
           label="Celular"
+
           typeInput="text"
           [controlForm]="form.controls.cel"
           mask="(00) 0 0000-0000"
