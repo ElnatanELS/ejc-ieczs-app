@@ -45,12 +45,6 @@ export class TableRowComponent implements OnInit {
   ngOnInit(): void {
     this.campos = Object.keys(this.user);
     this.columns = Object.keys(this.columns);
-    console.log('campos',this.campos);
-    console.log('columns',this.columns);
-    console.log('user',this.user);
-
-
-
 
   }
 

@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div *ngIf="campos === 'stt'" class="flex items-center gap-2 " [ngClass]="user.stt == 1 ? 'text-red-500' : user.stt == 2 ? 'text-orange-500' : 'text-green-500'">
+    <div *ngIf="campo === 'stt'" class="flex items-center gap-2 " [ngClass]="user.stt == 1 ? 'text-red-500' : user.stt == 2 ? 'text-orange-500' : 'text-green-500'">
       <svg-icon
         *ngIf="user.stt == 3"
         src="./assets/icons/heroicons/outline/check-circle.svg"
@@ -50,7 +50,7 @@
       {{ user.stt == 1 ? 'Aguardando Pagamento' : user.stt == 2 ? 'Aguardando a Carta' : 'Concluído' }}
     </div>
 
-    <div *ngIf="campo === 'actions'" class="text-center">
+    <div *ngIf="campo === 'actions'" class="text-right">
       <button
         (click)="toggleMenu()"
         class="text-muted-foreground hover:bg-card hover:text-foreground flex h-7 w-7 items-center justify-center rounded-md"

@@ -2,5 +2,4 @@
 
   <th *ngFor="let column of keys; let i = index" [ngClass]="i == 0 ? 'min-w-[20px]':'min-w-auto'">{{ column !== "actions" ? columns[column] : "" | uppercase}}</th>
 
-  <th class="w-[60px]"></th>
 </ng-container>
