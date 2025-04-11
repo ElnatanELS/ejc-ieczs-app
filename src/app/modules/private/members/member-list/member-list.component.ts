@@ -42,6 +42,7 @@ export class MemberListComponent implements OnInit {
     cracha: 'Crachá',
     equipe: 'Equipe',
     stt: 'Status',
+    actions:'actions',
   };
 
   dataSource: any = {
@@ -84,6 +85,7 @@ export class MemberListComponent implements OnInit {
           cracha: item.cracha,
           equipe: item.equipe,
           stt: item.stt,
+          id: item.id,
         };
       });
       // this.dataSource.items = res;

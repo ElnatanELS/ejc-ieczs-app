@@ -33,6 +33,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class TableRowComponent implements OnInit {
   @Input() user: any = <any>{};
+  @Input() columns: any ;
   @Output() userSelected: any = new EventEmitter();
   campos:any;
   public isOpen = false;
@@ -43,8 +44,12 @@ export class TableRowComponent implements OnInit {
   }
   ngOnInit(): void {
     this.campos = Object.keys(this.user);
-    this.campos = this.campos.filter((campo: any) => campo !== 'avatar');
-    this.campos = this.campos.filter((campo: any) => campo !== 'stt');
+    this.columns = Object.keys(this.columns);
+    console.log('campos',this.campos);
+    console.log('columns',this.columns);
+    console.log('user',this.user);
+
+
 
 
   }

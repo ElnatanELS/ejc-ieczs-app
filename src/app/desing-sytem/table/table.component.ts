@@ -150,13 +150,18 @@ export class TableComponent implements OnInit, OnChanges {
           novoItem[campo] = row[campo];
         }
       });
+
+      console.log('novoItem',novoItem);
+
       return novoItem;
 
 
   }
 
   ngOnInit() {
-    this.displayToColumns = Object.values(this.columns);
+    this.displayToColumns = this.columns;
+    console.log('this.displayToColumns', this.displayToColumns);
+
 
     this.filterService.searchField.set('');
     this.filterService.statusField.set('');
