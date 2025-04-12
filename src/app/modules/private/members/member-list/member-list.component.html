@@ -1,61 +1,64 @@
 <div class="bg-transparent h-[100vh]">
   <app-wrapper [title]="'Lista de Encontristas'">
     <!-- <eels-table > </eels-table> -->
-    <app-table [dataSource]="dataSource" [columns]="columns" (view)="setModal($event)"></app-table>
-
+    <app-table
+      [dataSource]="dataSource"
+      [columns]="columns"
+      (view)="setModal($event)"
+    ></app-table>
   </app-wrapper>
 </div>
 
-<app-modal [isOpen]="modalAberto" [title]="userSelected?.avatar?.nome" (closed)="fecharModal()">
+<app-modal
+  [isOpen]="modalAberto"
+  [title]="userSelected?.avatar?.nome"
+  (closed)="fecharModal()"
+>
   <div class="flex flex-col justify-center items-center w-full">
-
-
     <div class="w-full">
-      <div class="relative flex mt-16 w-full">
+      <div class="relative flex w-full">
         <span>Nome:</span>
-        <span>{{userSelected?.avatar?.nome}}</span>
-
+        <span>{{ userSelected?.avatar?.nome }}</span>
       </div>
       <div class="relative flex mt-2 w-full">
-        <span>CPF:</span>
-        <span>{{ userSelected?.avatar?.cpf }}</span>
+        <span class="pr-3">CPF:</span>
+        <span>{{ userSelected?.cpf }}</span>
       </div>
       <div class="relative flex mt-2 w-full">
-        <span>Nome do Crachá:</span>
-        <span>{{ userSelected?.avatar?.cracha }}</span>
+        <span class="pr-3">Nome do Crachá:</span>
+        <span>{{ userSelected?.cracha }}</span>
       </div>
       <div class="relative flex mt-2 w-full">
-        <span>Sexo:</span>
-        <span>{{ userSelected?.avatar?.sexo }}</span>
+        <span class="pr-3">Sexo:</span>
+        <span>{{ userSelected?.sexo }}</span>
       </div>
       <div class="relative flex mt-2 w-full">
-        <span>Celular:</span>
+        <span class="pr-3">Celular:</span>
         <span>{{ userSelected?.avatar?.cel }}</span>
       </div>
       <div class="relative flex mt-2 w-full">
-        <span>Igreja a qual pertence:</span>
-        <span>{{ userSelected?.avatar?.igreja }}</span>
+        <span class="pr-3">Igreja a qual pertence:</span>
+        <span>{{ userSelected?.igreja }}</span>
       </div>
       <div class="relative flex mt-2 w-full">
-        <span>Equipe:</span>
-        <span>{{ userSelected?.avatar?.equipe }}</span>
+        <span class="pr-3">Equipe:</span>
+        <span>{{ userSelected?.equipe }}</span>
       </div>
       <div class="relative flex mt-2 w-full">
-        <span>Data de Criação:</span>
-        <span>{{ userSelected?.avatar?.createdAt | date: 'dd/MM/yyyy' }}</span>
+        <span class="pr-3">Data de Criação:</span>
+        <span>{{ userSelected?.createdAt | date : "dd/MM/yyyy" }}</span>
       </div>
 
-      <div class="relative flex mt-2 w-full">
-
-        <eels-button class="w-full m-3"
-          text="Confimar Pagamento"
-        ></eels-button>
-        <eels-button class="w-full m-3"
-          text="Confimar Carta"
-        ></eels-button>
-        <eels-button class="w-full m-3"
-          text="Imprimir "
-        ></eels-button>
+      <div class="relative mt-2 w-full">
+        <div class="m-3">
+          <eels-button class="w-full" text="Confimar Pagamento"></eels-button>
+        </div>
+        <div class="m-3">
+          <eels-button class="w-full " text="Confimar Carta"></eels-button>
+        </div>
+        <div class="m-3">
+          <eels-button class="w-full " text="Imprimir "></eels-button>
+        </div>
       </div>
     </div>
 
@@ -66,5 +69,4 @@
         <span class="text-primary_color/50 font-bold">Entrar</span></a
       > -->
   </div>
-
 </app-modal>

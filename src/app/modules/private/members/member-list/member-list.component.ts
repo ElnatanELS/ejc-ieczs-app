@@ -74,22 +74,17 @@ export class MemberListComponent implements OnInit {
 
   ngOnInit() {
     this._registrationService.read().subscribe((res: any) => {
-      console.log(res);
       this.dataSource.items = res.map((item: any) => {
         return {
+          ...item,
           numeroInscricao:String(item.numeroInscricao).padStart(4, '0') ,
           avatar: {
             nome: item.nome,
             cel: `(${item.cel.replace(/[^0-9]/g, '').slice(0, 2)}) ${item.cel.replace(/[^0-9]/g, '').slice(2, 6)}-${item.cel.replace(/[^0-9]/g, '').slice(6)}`,
           },
-          cracha: item.cracha,
-          equipe: item.equipe,
-          stt: item.stt,
-          id: item.id,
+          cpf: item.cpf.replace(/[^0-9]/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'),
         };
       });
-      // this.dataSource.items = res;
-      console.log( this.dataSource.items);
 
     });
   }
