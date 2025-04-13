@@ -1,0 +1,300 @@
+<div
+  class="h-screen flex justify-center items-center md:bg-white bg-primary_color/60"
+>
+  <div class="hidden md:block md:w-1/2 lg:w-2/3">
+    <div
+      class="h-screen w-full bg-primary_color/60 flex flex-col justify-center items-center"
+    >
+      <img
+        src="assets/img/logo-branco.png"
+        class="animate-float w-64 lg:w-96"
+      />
+    </div>
+  </div>
+  <div
+    class="flex flex-col justify-center items-center gap-2 my-10 mx-12 w-full md:w-1/2 lg:w-1/3"
+  >
+    <img
+      src="./assets/img/logo.png"
+      alt="Eels logo"
+      class="w-48 mb-4 md:hidden"
+    />
+    <div class="bg-white rounded-lg md:shadow-none shadow-lg p-6 w-full">
+      <div class="w-full">
+        <div class="flex flex-col justify-center items-center w-full">
+          <!-- <h1 class="text-2xl md:text-3xl font-bold text-neutral-900">
+              Olá <span class="text-primary">!</span>
+            </h1> -->
+          <h1
+            *ngIf="!hasCpf"
+            class="text-lg md:text-xl lg:text-2xl font-bold text-neutral-900 text-center"
+          >
+            Vamos começar verificando como anda sua
+            <span class="text-primary_color/50">inscrição</span>.
+          </h1>
+          <h1
+            *ngIf="hasCpf"
+            class="text-lg md:text-xl lg:text-2xl font-bold text-neutral-900 text-center"
+          >
+            Preencha todos os seus
+            <span class="text-primary_color/50">dados</span>.
+          </h1>
+
+          <form [formGroup]="form" class="w-full">
+
+            <h3>Dados do Encontrista</h3>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Nome Completo"
+                typeInput="text"
+                [controlForm]="form.controls.nome"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full flex flex-col md:flex-row">
+              <div class="flex flex-col md:flex-row gap-4 w-full">
+                <eels-input
+                  class="w-full"
+                  label="Nome do Crachá"
+                  typeInput="text"
+                  [controlForm]="form.controls.cracha"
+                ></eels-input>
+              </div>
+              <div
+                class="flex flex-col md:flex-row gap-4 w-full justify-center"
+              >
+                <eels-radio
+                  [options]="['Masculino', 'Feminino']"
+                  [controlForm]="form.controls.sexo"
+                ></eels-radio>
+              </div>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Data de Nascimento"
+                typeInput="text"
+                mask="00/00/0000"
+                [controlForm]="form.controls.dataNascimento"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Celular"
+                typeInput="text"
+                [controlForm]="form.controls.cel"
+                mask="(00) 0 0000-0000"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+              label="Religião"
+              typeInput="text"
+              [controlForm]="form.controls.religiao"
+            ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="CEP"
+                typeInput="text"
+                [controlForm]="form.controls.cep"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Rua"
+                typeInput="text"
+                [controlForm]="form.controls.rua"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Número"
+                typeInput="text"
+                [controlForm]="form.controls.numero"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Bairro"
+                typeInput="text"
+                [controlForm]="form.controls.bairro"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Cidade"
+                typeInput="text"
+                [controlForm]="form.controls.cidade"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Estado"
+                typeInput="text"
+                [controlForm]="form.controls.estado"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Rede Social"
+                typeInput="text"
+                [controlForm]="form.controls.redeSocial"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full">
+              <h4>Tem Alergia?</h4>
+              <div
+                class="flex flex-col md:flex-row gap-4 w-full justify-center"
+              >
+              <eels-radio
+                  [options]="['Sim', 'Não']"
+                  [controlForm]="form.controls.temAlergia"
+                ></eels-radio>
+              </div>
+              <div
+                class="flex flex-col md:flex-row gap-4 w-full justify-center"
+              >
+                <eels-input
+                  label="Qual?"
+                  typeInput="text"
+                  *ngIf="form.controls.temAlergia.value === 'Sim'"
+                  [controlForm]="form.controls.alergia"
+                ></eels-input>
+               </div>
+            </div>
+            <div class="relative mt-2 w-full">
+              <h4>Tem Alguma doença?</h4>
+              <div
+                class="flex flex-col md:flex-row gap-4 w-full justify-center"
+              >
+              <eels-radio
+                  [options]="['Sim', 'Não']"
+                  [controlForm]="form.controls.temDoenca"
+                ></eels-radio>
+              </div>
+              <div
+                class="flex flex-col md:flex-row gap-4 w-full justify-center"
+              >
+                <eels-input
+                  label="Qual?"
+                  typeInput="text"
+                  *ngIf="form.controls.temDoenca.value === 'Sim'"
+                  [controlForm]="form.controls.doenca"
+                ></eels-input>
+               </div>
+            </div>
+
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Rede Social"
+                typeInput="text"
+                [controlForm]="form.controls.redeSocial"
+              ></eels-input>
+
+            </div>
+            <hr class="my-6 border-gray-300 w-full" />
+
+
+            <div class="relative mt-7 w-full">
+              <h2>Sobre os Pais adotivos</h2>
+              <eels-input
+                label="Nome dos Pais adotivos"
+                typeInput="text"
+                [controlForm]="form.controls.nomeDosPaisAdotivos"
+              ></eels-input>
+              <div>
+                <eels-input
+                  label="Celular"
+                  typeInput="text"
+                  [controlForm]="form.controls.telDosPaisAdotivos"
+                  mask="(00) 0 0000-0000"
+                ></eels-input>
+              </div>
+              <hr class="my-6 border-gray-300 w-full" />
+            </div>
+
+            <div class="relative mt-7 w-full">
+              <eels-input
+                label="Quem convido você?"
+                typeInput="text"
+                [controlForm]="form.controls.quemConvidou"
+              ></eels-input>
+              <div>
+                <eels-input
+                  label="Celular"
+                  typeInput="text"
+                  [controlForm]="form.controls.telQuemConvidou"
+                  mask="(00) 0 0000-0000"
+                ></eels-input>
+              </div>
+              <hr class="my-6 border-gray-300 w-full" />
+            </div>
+
+
+
+
+
+
+
+            <eels-progress-bar *ngIf="loading"></eels-progress-bar>
+            <eels-button
+              [text]="hasCpf ? buttonText2 : buttonText"
+              [isDisabled]="form.invalid"
+            ></eels-button>
+          </form>
+
+          <!-- <a
+              class="mt-3 font-normal text-sm md:text-base text-neutral-900 cursor-pointer w-full"
+              [routerLink]="['/login/sing-in']"
+              >
+              <span class="text-primary_color/50 font-bold">Entrar</span></a
+            > -->
+        </div>
+      </div>
+
+      <hr class="my-6 border-gray-300 w-full" />
+
+      <div class="w-full flex flex-col gap-4">
+        <p class="text-neutral-900 text-sm md:text-base">
+          Acompanhe nossas
+          <span class="font-bold text-primary_color/50">redes sociais</span>:
+        </p>
+        <div class="w-full flex justify-between items-center">
+          <a
+            class="bg-primary-100 rounded-full w-16 h-16 flex justify-center items-center cursor-pointer group transition-colors hover:bg-primary_color/50"
+          >
+            <svg
+              width="39"
+              height="39"
+              viewBox="0 0 39 39"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="transition-all duration-300 fill-primary_color/50 group-hover:fill-primary-100 group-hover:rotate-[360deg]"
+            >
+              <path
+                d="M21.1266 32.3992C24.4047 31.9821 27.401 30.3325 29.5065 27.7855C31.6119 25.2386 32.6686 21.9855 32.4616 18.6875C32.2547 15.3894 30.7997 12.2939 28.3924 10.0301C25.9851 7.76632 22.8062 6.5041 19.5016 6.5C16.1931 6.49754 13.0081 7.75667 10.5956 10.0209C8.18308 12.285 6.72466 15.3839 6.51748 18.6859C6.3103 21.988 7.36994 25.2448 9.48051 27.7928C11.5911 30.3408 14.5937 31.9881 17.8766 32.3992V22.75H14.6266V19.5H17.8766V16.8122C17.8766 14.6396 18.1041 13.8515 18.5266 13.0569C18.9428 12.2706 19.586 11.6279 20.3726 11.2125C20.9934 10.8794 21.7653 10.6795 23.114 10.5934C23.6486 10.5593 24.3409 10.6015 25.1908 10.7234V13.8109H24.3783C22.8881 13.8109 22.2723 13.8808 21.905 14.0774C21.686 14.1902 21.5076 14.3686 21.3948 14.5876C21.1998 14.9549 21.1283 15.3189 21.1283 16.8106V19.5H25.1908L24.3783 22.75H21.1283L21.1266 32.3992ZM19.5016 35.75C10.5268 35.75 3.25165 28.4749 3.25165 19.5C3.25165 10.5251 10.5268 3.25 19.5016 3.25C28.4765 3.25 35.7516 10.5251 35.7516 19.5C35.7516 28.4749 28.4765 35.75 19.5016 35.75Z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.instagram.com/ieczonasul/"
+            target="_blank"
+            class="bg-primary-100 rounded-full w-16 h-16 flex justify-center items-center cursor-pointer group transition-colors hover:bg-primary_color/50"
+          >
+            <svg
+              width="35"
+              height="35"
+              viewBox="0 0 35 35"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="transition-all duration-300 fill-primary_color/50 group-hover:fill-primary-100 group-hover:rotate-[360deg]"
+            >
+              <path
+                d="M11.375 2.91669H23.625C28.2917 2.91669 32.0834 6.70835 32.0834 11.375V23.625C32.0834 25.8683 31.1922 28.0197 29.606 29.606C28.0197 31.1922 25.8683 32.0834 23.625 32.0834H11.375C6.70835 32.0834 2.91669 28.2917 2.91669 23.625V11.375C2.91669 9.13173 3.80783 6.98032 5.39408 5.39408C6.98032 3.80783 9.13173 2.91669 11.375 2.91669ZM11.0834 5.83335C9.69097 5.83335 8.35561 6.38648 7.37104 7.37104C6.38648 8.35561 5.83335 9.69097 5.83335 11.0834V23.9167C5.83335 26.8188 8.18127 29.1667 11.0834 29.1667H23.9167C25.3091 29.1667 26.6444 28.6136 27.629 27.629C28.6136 26.6444 29.1667 25.3091 29.1667 23.9167V11.0834C29.1667 8.18127 26.8188 5.83335 23.9167 5.83335H11.0834ZM25.1563 8.02086C25.6397 8.02086 26.1034 8.21291 26.4453 8.55478C26.7871 8.89664 26.9792 9.3603 26.9792 9.84377C26.9792 10.3272 26.7871 10.7909 26.4453 11.1328C26.1034 11.4746 25.6397 11.6667 25.1563 11.6667C24.6728 11.6667 24.2091 11.4746 23.8673 11.1328C23.5254 10.7909 23.3334 10.3272 23.3334 9.84377C23.3334 9.3603 23.5254 8.89664 23.8673 8.55478C24.2091 8.21291 24.6728 8.02086 25.1563 8.02086ZM17.5 10.2084C19.4339 10.2084 21.2886 10.9766 22.656 12.344C24.0235 13.7115 24.7917 15.5662 24.7917 17.5C24.7917 19.4339 24.0235 21.2886 22.656 22.656C21.2886 24.0235 19.4339 24.7917 17.5 24.7917C15.5662 24.7917 13.7115 24.0235 12.344 22.656C10.9766 21.2886 10.2084 19.4339 10.2084 17.5C10.2084 15.5662 10.9766 13.7115 12.344 12.344C13.7115 10.9766 15.5662 10.2084 17.5 10.2084ZM17.5 13.125C16.3397 13.125 15.2269 13.586 14.4064 14.4064C13.586 15.2269 13.125 16.3397 13.125 17.5C13.125 18.6603 13.586 19.7731 14.4064 20.5936C15.2269 21.4141 16.3397 21.875 17.5 21.875C18.6603 21.875 19.7731 21.4141 20.5936 20.5936C21.4141 19.7731 21.875 18.6603 21.875 17.5C21.875 16.3397 21.4141 15.2269 20.5936 14.4064C19.7731 13.586 18.6603 13.125 17.5 13.125Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

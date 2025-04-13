@@ -8,10 +8,10 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'new-member',
+        path: 'inscricao-encontrista',
         loadChildren: () =>
-          import('../members/new-member/new-member.module').then(
-            (m) => m.NewMemberModule
+          import('../finders/finders-new/finders-new.module').then(
+            (m) => m.FindersNewModule
           ),
       },
       {

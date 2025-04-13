@@ -26,6 +26,13 @@ const routes: Routes = [
         (m) => m.LayoutModule
       ),
   },
+  {
+    path: 'inscricao-encontrista',
+    loadChildren: () =>
+      import('./modules/private/finders/finders-new/finders-new.module').then(
+        (m) => m.FindersNewModule
+      ),
+  },
 ];
 
 @NgModule({
