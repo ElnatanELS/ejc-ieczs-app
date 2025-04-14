@@ -12,10 +12,10 @@
     </div>
   </div>
   <div
-    class="flex flex-col justify-center items-center gap-2 my-10 mx-12 w-full md:w-1/2 lg:w-1/3"
+    class="flex flex-col h-screen overflow-y-auto items-center gap-2 my-10 mx-12 w-full md:w-1/2 lg:w-1/3"
   >
     <img
-      src="./assets/img/logo.png"
+      src="./assets/img/logo-branco.png"
       alt="Eels logo"
       class="w-48 mb-4 md:hidden"
     />
@@ -27,9 +27,11 @@
             </h1> -->
           <h1
             *ngIf="!hasCpf"
-            class="text-lg md:text-xl lg:text-2xl font-bold text-neutral-900 text-center"
+            class="text-lg md:text-xl lg:text-2xl font-bold my-4 text-neutral-900 text-center"
           >
-            Vamos começar verificando como anda sua
+            Olá é um prazer ter você aqui!
+            <span class="text-primary_color/50">Preencha</span> os dados
+            <span class="text-primary_color/50">para</span> sua
             <span class="text-primary_color/50">inscrição</span>.
           </h1>
           <h1
@@ -93,6 +95,65 @@
             </div>
             <div class="relative mt-2 w-full">
               <eels-input
+                label="Rede Social"
+                typeInput="text"
+                [controlForm]="form.controls.redeSocial"
+              ></eels-input>
+            </div>
+            <div class="relative mt-2 w-full flex flex-col md:flex-row">
+              <h4>Tem Alergia?</h4>
+              <div
+                class="flex flex-col md:flex-row gap-4 w-full justify-center"
+              >
+              <eels-radio
+                  [options]="['Sim', 'Não']"
+                  [controlForm]="form.controls.temAlergia"
+                ></eels-radio>
+              </div>
+              <div
+                class="flex flex-col md:flex-row gap-4 w-full justify-center"
+              >
+                <eels-input
+                  label="Qual?"
+                  typeInput="text"
+                  *ngIf="form.controls.temAlergia.value === 'Sim'"
+                  [controlForm]="form.controls.alergia"
+                ></eels-input>
+               </div>
+            </div>
+            <div class="relative mt-2 w-full flex flex-col md:flex-row">
+              <h4>Tem Alguma doença?</h4>
+              <div
+                class="flex flex-col md:flex-row gap-4 w-full justify-center"
+              >
+              <eels-radio
+                  [options]="['Sim', 'Não']"
+                  [controlForm]="form.controls.temDoenca"
+                ></eels-radio>
+              </div>
+              <div
+                class="flex flex-col md:flex-row gap-4 w-full justify-center"
+              >
+                <eels-input
+                  label="Qual?"
+                  typeInput="text"
+                  *ngIf="form.controls.temDoenca.value === 'Sim'"
+                  [controlForm]="form.controls.doenca"
+                ></eels-input>
+               </div>
+            </div>
+
+            <div class="relative mt-2 w-full">
+              <eels-input
+                label="Rede Social"
+                typeInput="text"
+                [controlForm]="form.controls.redeSocial"
+              ></eels-input>
+
+            </div>
+            <hr class="my-6 border-gray-300 w-full" />
+            <div class="relative mt-2 w-full">
+              <eels-input
                 label="CEP"
                 typeInput="text"
                 [controlForm]="form.controls.cep"
@@ -133,64 +194,6 @@
                 [controlForm]="form.controls.estado"
               ></eels-input>
             </div>
-            <div class="relative mt-2 w-full">
-              <eels-input
-                label="Rede Social"
-                typeInput="text"
-                [controlForm]="form.controls.redeSocial"
-              ></eels-input>
-            </div>
-            <div class="relative mt-2 w-full">
-              <h4>Tem Alergia?</h4>
-              <div
-                class="flex flex-col md:flex-row gap-4 w-full justify-center"
-              >
-              <eels-radio
-                  [options]="['Sim', 'Não']"
-                  [controlForm]="form.controls.temAlergia"
-                ></eels-radio>
-              </div>
-              <div
-                class="flex flex-col md:flex-row gap-4 w-full justify-center"
-              >
-                <eels-input
-                  label="Qual?"
-                  typeInput="text"
-                  *ngIf="form.controls.temAlergia.value === 'Sim'"
-                  [controlForm]="form.controls.alergia"
-                ></eels-input>
-               </div>
-            </div>
-            <div class="relative mt-2 w-full">
-              <h4>Tem Alguma doença?</h4>
-              <div
-                class="flex flex-col md:flex-row gap-4 w-full justify-center"
-              >
-              <eels-radio
-                  [options]="['Sim', 'Não']"
-                  [controlForm]="form.controls.temDoenca"
-                ></eels-radio>
-              </div>
-              <div
-                class="flex flex-col md:flex-row gap-4 w-full justify-center"
-              >
-                <eels-input
-                  label="Qual?"
-                  typeInput="text"
-                  *ngIf="form.controls.temDoenca.value === 'Sim'"
-                  [controlForm]="form.controls.doenca"
-                ></eels-input>
-               </div>
-            </div>
-
-            <div class="relative mt-2 w-full">
-              <eels-input
-                label="Rede Social"
-                typeInput="text"
-                [controlForm]="form.controls.redeSocial"
-              ></eels-input>
-
-            </div>
             <hr class="my-6 border-gray-300 w-full" />
 
 
@@ -212,7 +215,9 @@
               <hr class="my-6 border-gray-300 w-full" />
             </div>
 
+
             <div class="relative mt-7 w-full">
+              <h2>Quem convido você?"</h2>
               <eels-input
                 label="Quem convido você?"
                 typeInput="text"

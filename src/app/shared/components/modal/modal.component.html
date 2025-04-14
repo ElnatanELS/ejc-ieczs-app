@@ -2,7 +2,7 @@
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
   *ngIf="isOpen"
 >
-  <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-lg relative">
+  <div class="bg-white rounded-xl shadow-lg p-6 w-full  relative" [ngClass]="class">
     <button (click)="close()" class="absolute top-2 right-2 text-gray-500 hover:text-red-500">
       &times;
     </button>

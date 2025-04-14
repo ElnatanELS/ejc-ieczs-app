@@ -21,6 +21,13 @@ const routes: Routes = [
             (m) => m.MemberListModule
           ),
       },
+      {
+        path: 'finders-list',
+        loadChildren: () =>
+          import('../finders/finders-list/finders-list.module').then(
+            (m) => m.FindersListModule
+          ),
+      },
     ],
   },
 ];

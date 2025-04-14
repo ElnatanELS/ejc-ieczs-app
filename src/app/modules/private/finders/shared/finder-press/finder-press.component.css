@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.logo img {
+  height: 80px;
+}
+h1 {
+  text-align: center;
+}
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 15px;
+}
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+.section-title {
+  margin-top: 30px;
+  font-size: 1.2em;
+  text-decoration: underline;
+}
+.form-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.form-group {
+  flex: 1;
+  min-width: 120px;
+}
+.form-group-3 {
+  flex: 3;
+  min-width: 120px;
+}
+.signature-section {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: flex-end;
+}
+.signature-box {
+  flex: 1;
+  border-top: 1px solid #000;
+  text-align: center;
+  padding-top: 5px;
+}
+.date-box {
+  flex: 1;
+}

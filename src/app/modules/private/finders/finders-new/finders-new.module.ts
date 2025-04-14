@@ -8,6 +8,7 @@ import { EelsInputModule } from 'src/app/desing-sytem/inputs/eels-input/eels-inp
 import { EelsRadioModule } from 'src/app/desing-sytem/inputs/eels-radio/eels-radio.module';
 import { EelsSelectModule } from 'src/app/desing-sytem/inputs/eels-select/eels-select.module';
 import { EelsProgressBarModule } from 'src/app/desing-sytem/progress-bar/eels-progress-bar.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -20,6 +21,9 @@ import { EelsProgressBarModule } from 'src/app/desing-sytem/progress-bar/eels-pr
     MatSnackBarModule,
     EelsProgressBarModule,
     EelsSelectModule,
+    RouterModule.forChild([
+          { path: '', pathMatch: 'full', component: FindersNewComponent },
+        ]),
   ],
   declarations: [FindersNewComponent],
 })

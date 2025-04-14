@@ -9,9 +9,10 @@ import { WrapperModule } from 'src/app/shared/components/wrapper/wrapper.module'
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { ModalModule } from 'src/app/shared/components/modal/modal.module'; // Ensure this path is correct
 
 @NgModule({
-  declarations: [MemberListComponent, ModalComponent],
+  declarations: [MemberListComponent],
   imports: [
     CommonModule,
     EelsInputModule,
@@ -20,6 +21,7 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
     MatIconModule,
     WrapperModule,
     TableModule,
+    ModalModule,
 
     // EelsTableModule,
     RouterModule.forChild([

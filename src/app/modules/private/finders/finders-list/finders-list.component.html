@@ -1,3 +1,42 @@
-<p>
-  finders-list works!
-</p>
+<div class="bg-transparent h-[100vh]">
+  <app-wrapper [title]="'Lista de Encontristas'">
+    <!-- <eels-table > </eels-table> -->
+    <app-table
+      [dataSource]="dataSource"
+      [columns]="columns"
+      (view)="setModal($event)"
+    ></app-table>
+  </app-wrapper>
+</div>
+
+<app-modal
+  [isOpen]="modalAberto"
+  [title]="userSelected?.avatar?.nome"
+  class="max-w-[90%] h-[50%] overflow-y-auto"
+  (closed)="fecharModal()"
+>
+  <div class="flex flex-col justify-center items-center w-full">
+    <div class="w-full">
+      <app-finder-press [user]="userSelected"  class="hidden" id="recibo"></app-finder-press>
+
+      <div class="relative mt-2 w-full">
+        <div class="m-3">
+          <eels-button class="w-full" text="Confimar Pagamento"></eels-button>
+        </div>
+        <div class="m-3">
+          <eels-button class="w-full " text="Confimar Carta"></eels-button>
+        </div>
+        <div class="m-3">
+          <eels-button class="w-full " text="Imprimir " (clickEvent)="printRecibo()"></eels-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <a
+        class="mt-3 font-normal text-sm md:text-base text-neutral-900 cursor-pointer w-full"
+        [routerLink]="['/login/sing-in']"
+        >
+        <span class="text-primary_color/50 font-bold">Entrar</span></a
+      > -->
+  </div>
+</app-modal>
