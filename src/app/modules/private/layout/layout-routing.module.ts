@@ -8,6 +8,18 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: '',
+        redirectTo: '',
+        pathMatch: 'full'
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('../home/home.module').then(
+            (m) => m.HomeModule
+          ),
+      },
+      {
         path: 'inscricao-encontrista',
         loadChildren: () =>
           import('../finders/finders-new/finders-new.module').then(
