@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { RegistrationService } from 'src/app/modules/public/registration/registration.service';
 import { LocalStorageService } from 'src/app/shared/services/localStorage/local-storage.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service';
+import { FindersServiceService } from '../../service/finders-service.service';
 
 @Component({
   selector: 'app-form',
@@ -22,7 +23,7 @@ export class FormComponent implements OnInit {
         private _snackBarService: SnackbarService,
         public router: Router,
         private _localStore: LocalStorageService,
-        private _registrationService: RegistrationService
+        private _findersService: FindersServiceService,
       ) {}
 
       form = this._formBuilder.group({
@@ -54,7 +55,37 @@ export class FormComponent implements OnInit {
 
       loading = false;
 
+      inscricao:any ={}
   ngOnInit() {
+    this.inscricao = this._localStore.get('inscricao');
+    console.log(this.inscricao);
+  }
+
+  create() {
+    console.log(this.form.value);
+    console.log('dasdasd entrou');
+
+
+    this.loading = true;
+    if (this.form.valid) {
+      this._findersService
+        .update(this.inscricao.id, {
+          ...this.form.value,
+          createAt: new Date().toString(),
+          stt: 5,
+        })
+        .then((res) => {
+          console.log('resd',res);
+
+          this._snackBarService.openSnackBar(
+            'Inscrição feita com sucesso',
+            'success'
+          );
+          // this.router.navigate(['login']);
+          this.loading = false;
+        })
+
+    }
   }
 
 }

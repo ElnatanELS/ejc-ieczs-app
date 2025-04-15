@@ -31,23 +31,41 @@
       </div>
     </div>
 
-    <div *ngIf="campo === 'stt'" class="flex items-center gap-2 " [ngClass]="user.stt == 1 ? 'text-red-500' : user.stt == 2 ? 'text-orange-500' : 'text-green-500'">
+    <div *ngIf="campo === 'stt'" class="flex items-center gap-2 " [ngClass]="user.stt == 1 || user.stt == 4 ? 'text-red-500' : user.stt == 2 || user.stt == 5 ? 'text-orange-500' : 'text-green-500'">
       <svg-icon
-        *ngIf="user.stt == 3"
+        *ngIf="user.stt == 3 || user.stt == 6"
         src="./assets/icons/heroicons/outline/check-circle.svg"
         [svgClass]="'h-5 w-5 text-green-500'">
       </svg-icon>
       <svg-icon
-        *ngIf="user.stt == 2"
+        *ngIf="user.stt == 2 || user.stt == 5"
         src="./assets/icons/heroicons/outline/newspaper.svg"
         [svgClass]="'h-5 w-5 text-orange-500'">
       </svg-icon>
+
       <svg-icon
-        *ngIf="user.stt == 1"
+        *ngIf="user.stt == 1 || user.stt == 4"
         src="./assets/icons/heroicons/outline/exclamation-triangle.svg"
         [svgClass]="'h-5 w-5 text-red-500'">
       </svg-icon>
-      {{ user.stt == 1 ? 'Aguardando Pagamento' : user.stt == 2 ? 'Aguardando a Carta' : 'Concluído' }}
+      <ng-container [ngSwitch]="user.stt">
+        <ng-container *ngSwitchCase="1">
+          <span class="text-sm font-semibold">Aguardando Pagamento</span>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+          <span class="text-sm font-semibold">Aguardando a Carta</span>
+        </ng-container>
+        <ng-container *ngSwitchCase="3">
+          <span class="text-sm font-semibold">Finalizado</span>
+        </ng-container>
+        <ng-container *ngSwitchCase="4">
+          <span class="text-sm font-semibold">Aguardando Preenchimento</span>
+        </ng-container>
+        <ng-container *ngSwitchCase="5">
+          <span class="text-sm font-semibold">Aguardando Documento</span>
+        </ng-container>
+
+      </ng-container>
     </div>
 
     <div *ngIf="campo === 'actions'" class="text-right">
