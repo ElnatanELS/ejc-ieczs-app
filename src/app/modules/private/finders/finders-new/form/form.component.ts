@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { RegistrationService } from 'src/app/modules/public/registration/registration.service';
 import { LocalStorageService } from 'src/app/shared/services/localStorage/local-storage.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service';
 import { FindersServiceService } from '../../service/finders-service.service';
+import { CepService } from 'src/app/shared/services/cep/cep.service';
 
 @Component({
   selector: 'app-form',
@@ -20,6 +21,7 @@ export class FormComponent implements OnInit {
       constructor(
         private _formBuilder: FormBuilder,
         private _auth: AuthService,
+        private _cep: CepService,
         private _snackBarService: SnackbarService,
         public router: Router,
         private _localStore: LocalStorageService,
@@ -27,30 +29,29 @@ export class FormComponent implements OnInit {
       ) {}
 
       form = this._formBuilder.group({
-        nome: [''],
-        cracha: [''],
-        sexo: [''],
-        dataNascimento: [''],
-        rua: [''],
-        numero: [''],
-        complemento: [''],
-        bairro: [''],
-        cidade: [''],
-        estado: [''],
-        cep: [''],
-        cel: [''],
+        nome: ['', Validators.required],
+        cracha: ['', Validators.required],
+        sexo: ['', Validators.required],
+        dataNascimento: ['', Validators.required],
+        logradouro: ['', Validators.required],
+        numero: ['', Validators.required],
+        bairro: ['', Validators.required],
+        localidade: ['', Validators.required],
+        uf: ['', Validators.required],
+        cep: ['', Validators.required],
+        cel: ['', Validators.required],
         redeSocial: [''],
         religiao: [''],
-        temAlergia: [''],
+        temAlergia: ['', Validators.required],
         alergia: [''],
-        temMedicamento: [''],
+        temMedicamento: ['', Validators.required],
         medicamento: [''],
-        temDoenca: [''],
+        temDoenca: ['', Validators.required],
         doenca: [''],
-        nomeDosPaisAdotivos: [''],
-        telDosPaisAdotivos: [''],
-        quemConvidou: [''],
-        telQuemConvidou: [''],
+        nomeDosPaisAdotivos: ['', Validators.required],
+        telDosPaisAdotivos: ['', Validators.required],
+        quemConvidou: ['', Validators.required],
+        telQuemConvidou: ['', Validators.required],
       });
 
       loading = false;
@@ -58,14 +59,9 @@ export class FormComponent implements OnInit {
       inscricao:any ={}
   ngOnInit() {
     this.inscricao = this._localStore.get('inscricao');
-    console.log(this.inscricao);
   }
 
   create() {
-    console.log(this.form.value);
-    console.log('dasdasd entrou');
-
-
     this.loading = true;
     if (this.form.valid) {
       this._findersService
@@ -81,11 +77,17 @@ export class FormComponent implements OnInit {
             'Inscrição feita com sucesso',
             'success'
           );
-          // this.router.navigate(['login']);
+          this.router.navigate(['/inscricao-encontrista/confirmacao']);
           this.loading = false;
         })
 
     }
+  }
+
+  getCep() {
+    this._cep.getCep(String(this.form.value.cep)).subscribe((res) => {
+      this.form.patchValue(res);
+    });
   }
 
 }

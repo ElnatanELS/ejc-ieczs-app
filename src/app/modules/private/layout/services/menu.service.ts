@@ -14,6 +14,19 @@ export class MenuService implements OnDestroy {
 
   pages: any[] = [
     {
+      group: '',
+      separator: true,
+      items: [
+        {
+          icon: 'assets/icons/heroicons/outline/chart-pie.svg',
+          label: 'Dashboard',
+          route: '/home',
+
+        },
+
+      ],
+    },
+    {
       group: 'Encontreiros',
       separator: false,
       items: [
@@ -31,7 +44,7 @@ export class MenuService implements OnDestroy {
       separator: false,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/user-circle.svg',
+          icon: 'assets/icons/heroicons/outline/user-lis.svg',
           label: 'Lista de Encontristas',
           route: '/finders-list',
 

@@ -11,6 +11,7 @@ import { EelsProgressBarModule } from 'src/app/desing-sytem/progress-bar/eels-pr
 import { RouterModule } from '@angular/router';
 import { FormComponent } from './form/form.component';
 import { LoginComponent } from './login/login.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { LoginComponent } from './login/login.component';
                 },
                 { path: 'login', component: LoginComponent },
                 { path: 'formulario', component: FormComponent },
+                { path: 'confirmacao', component: ConfirmationComponent },
               ] },
         ]),
   ],

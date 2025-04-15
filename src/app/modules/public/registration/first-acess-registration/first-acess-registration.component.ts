@@ -1,10 +1,10 @@
-import { LocalStorageService } from '../../../../shared/services/localStorage/local-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service';
-import { formatDateInput } from 'src/app/shared/utils/format-date.utils';
+import { cpfValidator } from 'src/app/shared/utils/validators/validators';
+import { LocalStorageService } from '../../../../shared/services/localStorage/local-storage.service';
 import { RegistrationService } from '../registration.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class FirstAcessRegistrationComponent implements OnInit {
   ) {}
 
   form = this._formBuilder.group({
-    cpf: ['', Validators.required],
+    cpf: ['', [Validators.required, cpfValidator()]],
     nome: [''],
     cracha: [''],
     sexo: [''],

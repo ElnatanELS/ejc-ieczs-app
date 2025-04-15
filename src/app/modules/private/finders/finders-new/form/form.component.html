@@ -120,28 +120,46 @@
           ></eels-input>
          </div>
       </div>
-
-      <div class="relative mt-2 w-full">
-        <eels-input
-          label="Rede Social"
-          typeInput="text"
-          [controlForm]="form.controls.redeSocial"
-        ></eels-input>
-
+      <div class="relative mt-2 w-full flex flex-col md:flex-row">
+        <h4>Toma Algum Medicamento?</h4>
+        <div
+          class="flex flex-col md:flex-row gap-4 w-full justify-center"
+        >
+        <eels-radio
+            [options]="['Sim', 'Não']"
+            [controlForm]="form.controls.temMedicamento"
+          ></eels-radio>
+        </div>
+        <div
+          class="flex flex-col md:flex-row gap-4 w-full justify-center"
+        >
+          <eels-input
+            label="Qual?"
+            typeInput="text"
+            *ngIf="form.controls.temMedicamento.value === 'Sim'"
+            [controlForm]="form.controls.medicamento"
+          ></eels-input>
+         </div>
       </div>
+
+
       <hr class="my-6 border-gray-300 w-full" />
       <div class="relative mt-2 w-full">
+        <h3>Endereço:</h3>
         <eels-input
           label="CEP"
           typeInput="text"
           [controlForm]="form.controls.cep"
+          (focusout)="getCep()"
+          [maxL]="'9'"
+          [mask]="'00000-000'"
         ></eels-input>
       </div>
       <div class="relative mt-2 w-full">
         <eels-input
           label="Rua"
           typeInput="text"
-          [controlForm]="form.controls.rua"
+          [controlForm]="form.controls.logradouro"
         ></eels-input>
       </div>
       <div class="relative mt-2 w-full">
@@ -162,14 +180,14 @@
         <eels-input
           label="Cidade"
           typeInput="text"
-          [controlForm]="form.controls.cidade"
+          [controlForm]="form.controls.localidade"
         ></eels-input>
       </div>
       <div class="relative mt-2 w-full">
         <eels-input
           label="Estado"
           typeInput="text"
-          [controlForm]="form.controls.estado"
+          [controlForm]="form.controls.uf"
         ></eels-input>
       </div>
       <hr class="my-6 border-gray-300 w-full" />
