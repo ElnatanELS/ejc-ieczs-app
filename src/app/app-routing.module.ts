@@ -33,6 +33,20 @@ const routes: Routes = [
         (m) => m.FindersNewModule
       ),
   },
+  {
+    path: 'sorteio',
+    loadChildren: () =>
+      import('../app/modules/private/raffle/raffle-new/raffle-new.module').then(
+        (m) => m.RaffleNewModule
+      ),
+  },
+  {
+    path: 'sorteio-visualizacao',
+    loadChildren: () =>
+      import('../app/modules/private/raffle/raffle-view/raffle-view.module').then(
+        (m) => m.RaffleViewModule
+      ),
+  },
 ];
 
 @NgModule({

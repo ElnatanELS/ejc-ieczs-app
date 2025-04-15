@@ -3,11 +3,10 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, first, switchMap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FindersServiceService {
-
-collection: string = 'finders';
+  collection: string = 'finders';
 
   finders: Observable<any[]> | undefined;
 
@@ -41,6 +40,13 @@ collection: string = 'finders';
 
     return this.finders;
   }
+  filterNumIns(num: number) {
+    this.finders = this.firestore
+      .collection(this.collection, (ref) => ref.where('numeroInscricao', '==', num))
+      .valueChanges({ idField: 'id' });
+
+    return this.finders;
+  }
 
   /**
    * Gera um novo ID sequencial único
@@ -70,5 +76,4 @@ collection: string = 'finders';
       })
     );
   }
-
 }

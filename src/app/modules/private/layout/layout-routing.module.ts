@@ -40,20 +40,7 @@ const routes: Routes = [
             (m) => m.FindersListModule
           ),
       },
-      {
-        path: 'sorteio',
-        loadChildren: () =>
-          import('../raffle/raffle-new/raffle-new.module').then(
-            (m) => m.RaffleNewModule
-          ),
-      },
-      {
-        path: 'sorteio-visualizacao',
-        loadChildren: () =>
-          import('../raffle/raffle-view/raffle-view.module').then(
-            (m) => m.RaffleViewModule
-          ),
-      },
+
     ],
   },
 ];

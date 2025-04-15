@@ -34,7 +34,7 @@ export class FindersListComponent implements OnInit {
     numeroInscricao: 'Número de Inscrição',
     nome: 'Nome do Encontrista',
     stt: 'Status',
-    rensposavel: 'Responsável',
+    quemConvidou: 'Responsável',
     actions: 'actions',
   };
 
