@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore'
 import { Observable } from 'rxjs';
+import { FindersServiceService } from 'src/app/modules/private/finders/service/finders-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class AuthService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     private _snackBarService: SnackbarService,
+    private _findersService: FindersServiceService,
     private db: AngularFirestore,
     public afs: AngularFirestore
   ) {
@@ -55,6 +57,29 @@ export class AuthService {
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.router.navigate(['home']);
+          }
+        });
+      })
+      .catch((error) => {
+        this._snackBarService.openSnackBar("E-mail/Senha inválido", 'error')
+      });
+  }
+  SignInFinders(email: string, password: string) {
+    return this.afAuth
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        // this.SetUserData(result.user);
+        console.log('teste',result);
+
+
+
+        this.afAuth.authState.subscribe((user) => {
+          if (user) {
+            this._findersService.filterLogin(String(user.email)).subscribe((res) => {
+              localStorage.setItem('inscricao', JSON.stringify(res[0]));
+              this.router.navigate(['inscricao-encontrista/formulario'])
+            })
+
           }
         });
       })
@@ -127,6 +152,15 @@ export class AuthService {
       localStorage.removeItem('user');
       localStorage.removeItem('USER');
       this.router.navigate(['/login']);
+    });
+  }
+  SignOutFinders() {
+    return this.afAuth.signOut().then(() => {
+      console.log('ent');
+
+      localStorage.removeItem('user');
+      localStorage.removeItem('USER');
+      this.router.navigate(['/inscricao-encontrista']);
     });
   }
 

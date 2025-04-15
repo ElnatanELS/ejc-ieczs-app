@@ -34,9 +34,9 @@ collection: string = 'finders';
     return this.firestore.doc(`${this.collection}/` + record_id).delete();
   }
 
-  filterCpf(cpf: string) {
+  filterLogin(login: string) {
     this.finders = this.firestore
-      .collection(this.collection, (ref) => ref.where('cpf', '==', cpf))
+      .collection(this.collection, (ref) => ref.where('login', '==', login))
       .valueChanges({ idField: 'id' });
 
     return this.finders;

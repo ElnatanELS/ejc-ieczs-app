@@ -9,6 +9,8 @@ import { EelsRadioModule } from 'src/app/desing-sytem/inputs/eels-radio/eels-rad
 import { EelsSelectModule } from 'src/app/desing-sytem/inputs/eels-select/eels-select.module';
 import { EelsProgressBarModule } from 'src/app/desing-sytem/progress-bar/eels-progress-bar.module';
 import { RouterModule } from '@angular/router';
+import { FormComponent } from './form/form.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -22,9 +24,19 @@ import { RouterModule } from '@angular/router';
     EelsProgressBarModule,
     EelsSelectModule,
     RouterModule.forChild([
-          { path: '', pathMatch: 'full', component: FindersNewComponent },
+          { path: '',
+            component: FindersNewComponent,
+             children: [
+                {
+                  path: '',
+                  redirectTo: 'login',
+                  pathMatch: 'full'
+                },
+                { path: 'login', component: LoginComponent },
+                { path: 'formulario', component: FormComponent },
+              ] },
         ]),
   ],
-  declarations: [FindersNewComponent],
+  declarations: [FindersNewComponent, FormComponent, LoginComponent],
 })
 export class FindersNewModule {}

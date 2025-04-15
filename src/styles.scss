@@ -79,6 +79,19 @@ body {
   @apply bg-danger-600;
   @apply text-white;
 }
+
+.mat-mdc-snack-bar-container {
+  &.snackbar-type-soft-error {
+    --mdc-snackbar-container-color: #d42a46;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  &.snackbar-type-soft-success {
+    --mdc-snackbar-container-color: #388a5a;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
