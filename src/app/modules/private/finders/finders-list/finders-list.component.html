@@ -17,18 +17,144 @@
 >
   <div class="flex flex-col justify-center items-center w-full">
     <div class="w-full">
-      <app-finder-press [user]="userSelected"  class="hidden" id="recibo"></app-finder-press>
-
+      <h3>Dados do Encontrista</h3>
       <div class="relative mt-2 w-full">
-        <div class="m-3">
-          <eels-button class="w-full" text="Confimar Pagamento"></eels-button>
+        <span class="pr-3">Nome Completo:</span>
+        <span>{{ userSelected?.nome }}</span>
+      </div>
+      <div class="relative mt-2 w-full flex flex-col md:flex-row">
+        <div class="flex flex-col md:flex-row gap-4 w-full">
+          <span class="pr-3">Nome do Crachá:</span>
+          <span>{{ userSelected?.cracha }}</span>
         </div>
-        <div class="m-3">
-          <eels-button class="w-full " text="Confimar Carta"></eels-button>
+
+        <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+          <span class="pr-3">Sexo:</span>
+          <span>{{ userSelected?.sexo }}</span>
         </div>
-        <div class="m-3">
-          <eels-button class="w-full " text="Imprimir " (clickEvent)="printRecibo()"></eels-button>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Data de Nascimento:</span>
+        <span>{{ userSelected?.dataNascimento | date : "dd/MM/yyyy" }}</span>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Celular:</span>
+        <span>{{ userSelected?.avatar?.cel }}</span>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Religão:</span>
+        <span>{{ userSelected?.religiao }}</span>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Rede Social:</span>
+        <span>{{ userSelected?.redeSocial }}</span>
+      </div>
+      <div class="relative mt-2 w-full flex flex-col md:flex-row">
+        <h4>Tem Alergia?</h4>
+        <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+          <span>{{ userSelected?.temAlergia }}</span>
+
+          <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+            <span class="pr-3">Qual?</span>
+            <span *ngIf="userSelected?.temAlergia === 'Sim'">{{
+              userSelected?.alergia
+            }}</span>
+          </div>
         </div>
+      </div>
+      <div class="relative mt-2 w-full flex flex-col md:flex-row">
+        <h4>Tem Alguma doença?</h4>
+        <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+          <span>{{ userSelected?.temDoenca }}</span>
+
+          <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+            <span class="pr-3">Qual?</span>
+            <span *ngIf="userSelected?.temDoenca === 'Sim'">{{
+              userSelected?.doenca
+            }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Rede Social:</span>
+        <span>{{ userSelected?.redeSocial }}</span>
+      </div>
+
+      <hr class="my-6 border-gray-300 w-full" />
+      <h2>Endereço:</h2>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">CEP:</span>
+        <span>{{ userSelected?.cep }}</span>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Rua:</span>
+        <span>{{ userSelected?.rua }}</span>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Número:</span>
+        <span>{{ userSelected?.numero }}</span>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Bairro:</span>
+        <span>{{ userSelected?.bairro }}</span>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Cidade:</span>
+        <span>{{ userSelected?.cidade }}</span>
+      </div>
+      <div class="relative mt-2 w-full">
+        <span class="pr-3">Estado:</span>
+        <span>{{ userSelected?.estado }}</span>
+      </div>
+      <hr class="my-6 border-gray-300 w-full" />
+
+      <div class="relative mt-7 w-full">
+        <h2>Sobre os Pais adotivos</h2>
+
+        <span class="pr-3">Nome dos Pais adotivos:</span>
+        <span>{{ userSelected?.nomeDosPaisAdotivos }}</span>
+
+        <div>
+          <span class="pr-3">Celular:</span>
+          <span>{{ userSelected?.telDosPaisAdotivos }}</span>
+        </div>
+        <hr class="my-6 border-gray-300 w-full" />
+      </div>
+
+      <div class="relative mt-7 w-full">
+        <h2>Quem convido você?"</h2>
+        <span class="pr-3">Nome:</span>
+        <span>{{ userSelected?.quemConvidou }}</span>
+
+        <div>
+          <span class="pr-3">Celular:</span>
+          <span>{{ userSelected?.telQuemConvidou }}</span>
+        </div>
+        <hr class="my-6 border-gray-300 w-full" />
+      </div>
+    </div>
+
+    <app-finder-press
+      [user]="userSelected"
+      class="hidden"
+      id="recibo"
+    ></app-finder-press>
+
+    <div class="relative mt-2 w-full">
+      <div class="m-3" *ngIf="userSelected?.stt == 5">
+        <eels-button
+          class="w-full"
+          text="Confirmar Documento"
+          (clickEvent)="changeStt(userSelected.id, 3)"
+        ></eels-button>
+      </div>
+
+      <div class="m-3" *ngIf="userSelected?.stt == 4">
+        <eels-button
+          class="w-full"
+          text="Imprimir "
+          (clickEvent)="printRecibo()"
+        ></eels-button>
       </div>
     </div>
 

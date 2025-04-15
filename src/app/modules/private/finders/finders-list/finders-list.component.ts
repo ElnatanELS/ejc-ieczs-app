@@ -1,6 +1,7 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FindersServiceService } from '../service/finders-service.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-finders-list',
@@ -43,7 +44,7 @@ export class FindersListComponent implements OnInit {
 
   userSelected: any = <any>{};
 
-  constructor(private _findersService: FindersServiceService) {}
+  constructor(private _findersService: FindersServiceService, private _snackService:SnackbarService) {}
 
   modalAberto = false;
 
@@ -197,6 +198,13 @@ input, textarea {
         printWindow.close();
       }, 500);
     }
+  }
+
+  changeStt(id: string, stt: number) {
+    this._findersService.update(id, { stt: stt }).then((res: any) => {
+      this._snackService.openSnackBar('Status atualizado com sucesso!', 'success');
+      this.fecharModal();
+    });
   }
 
 
