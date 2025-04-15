@@ -13,6 +13,7 @@
   [isOpen]="modalAberto"
   [title]="userSelected?.avatar?.nome"
   (closed)="fecharModal()"
+  class="max-w-lg"
 >
   <div class="flex flex-col justify-center items-center w-full">
     <div class="w-full">
@@ -50,14 +51,14 @@
       </div>
 
       <div class="relative mt-2 w-full">
-        <div class="m-3">
-          <eels-button class="w-full" text="Confimar Pagamento"></eels-button>
+        <div class="m-3" *ngIf="userSelected?.stt == 1 || userSelected?.stt == 4">
+          <eels-button class="w-full" text="Confimar Pagamento" (clickEvent)="changeStt(userSelected.id,2)"></eels-button>
+        </div>
+        <div class="m-3" *ngIf="userSelected?.stt == 2 || userSelected?.stt == 5">
+          <eels-button class="w-full " text="Confimar Carta" (clickEvent)="changeStt(userSelected.id,3)"></eels-button>
         </div>
         <div class="m-3">
-          <eels-button class="w-full " text="Confimar Carta"></eels-button>
-        </div>
-        <div class="m-3">
-          <eels-button class="w-full " text="Imprimir "></eels-button>
+          <eels-button class="w-full " text="Imprimir " (clickEvent)="printRecibo()"></eels-button>
         </div>
       </div>
     </div>
@@ -70,3 +71,26 @@
       > -->
   </div>
 </app-modal>
+
+
+<div class="hidden" id="recibo">
+  <div class="hidden">
+    <div class="relative mt-16 w-full flex justify-center" >
+      <img src="../../../../../assets/img/logo-preto.png" class="flex " alt="">
+    </div>
+
+  </div>
+  <div class="relative mt-16 w-full flex justify-center">
+    <span class="text-8xl">{{ userSelected?.numeroInscricao }}</span>
+  </div>
+  <div class="relative mt-2 w-full flex justify-center">
+    <span class="text-xs">seu numero para o sorteio de ficha.</span>
+  </div>
+
+  <div class="relative mt-16 w-full flex justify-center">
+    <h1 class="text-base font-bold text-neutral-900 text-center">
+      A data do nosso EJC será dias
+      <span class="text-primary_color/50">13, 14 e 15 de Junho</span>.
+    </h1>
+  </div>
+</div>

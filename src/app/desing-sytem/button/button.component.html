@@ -3,6 +3,7 @@ class="w-full"
   [disabled]="isDisabled"
   mat-flat-button
   color="primary"
+  [ngClass]="class"
   (click)="onClick()"
   [type]="typeButton === '' ? 'button' : typeButton"
 >

@@ -9,6 +9,7 @@ export class EelsButtonComponent {
   @Input() text = '';
   @Input() typeButton = '';
   @Input() icon = '';
+  @Input() class = '';
   @Input() isDisabled!: boolean;
 
   @Output() clickEvent = new EventEmitter<void>();
