@@ -14,6 +14,7 @@ import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.servi
 import { PaymentComponent } from './payment/payment.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { EelsSelectModule } from "../../../desing-sytem/inputs/eels-select/eels-select.module";
+import { ChipsComponent } from './confirmation/chips/chips.component';
 
 @NgModule({
 
@@ -29,7 +30,7 @@ import { EelsSelectModule } from "../../../desing-sytem/inputs/eels-select/eels-
     EelsProgressBarModule,
     EelsSelectModule
 ],
-  declarations: [RegistrationComponent, FirstAcessRegistrationComponent, PaymentComponent, ConfirmationComponent],
+  declarations: [RegistrationComponent, FirstAcessRegistrationComponent, PaymentComponent, ConfirmationComponent, ChipsComponent],
   providers: [RegistrationService,SnackbarService],
 })
 export class RegistrationModule {}

@@ -6,7 +6,7 @@
   <h1 class="text-lg md:text-xl lg:text-2xl font-bold text-neutral-900">
     Sua Inscrição já foi <span class="text-primary_color/50">realizada</span>.
   </h1>
-  <div id="recibo">
+  <div >
     <div class="hidden">
       <div class="relative mt-16 w-full flex justify-center" >
         <img src="../../../../../assets/img/logo-preto.png" class="flex " alt="">
@@ -30,7 +30,7 @@
       </h1>
     </div>
   </div>
-  <div class="relative mt-2 w-full flex justify-center">
+  <div class="relative mt-2 w-full flex md:hidden justify-center">
     <h3 class="text-base font-bold text-neutral-900 text-center">
       Na escola
       <span class="text-primary_color/50"
@@ -51,4 +51,5 @@
       >
       <span class="text-primary_color/50 font-bold">Entrar</span></a
     > -->
+    <app-chips [user]="inscricao?.data" class="hidden" id="recibo"></app-chips>
 </div>

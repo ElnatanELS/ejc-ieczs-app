@@ -31,42 +31,54 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
 
   printRecibo() {
     const printContents = document.getElementById('recibo')?.innerHTML;
-    const printWindow = window.open('', '', '');
+    const printWindow = window.open('', 'width=302,height=600');
 
     if (printWindow && printContents) {
       // Espera o documento estar pronto
       printWindow.document.head.innerHTML = `
         <style>
-          body {
-            font-family: monospace;
-            font-size: 12px;
-            padding: 10px;
-            margin: 0;
-          }
-          .text-8xl {
-            font-size: 6rem /* 96px */;
-            line-height: 1;
-          }
-            .text-xs {
-    font-size: 0.75rem /* 12px */;
-    line-height: 1rem /* 16px */;
-}
-    .text-base {
-    font-size: 1rem /* 16px */;
-    line-height: 1.5rem /* 24px */;
-}
-    .justify-center {
-    justify-content: center;
-}
-    .flex {
-    display: flex;
+
+
+        /* CSS global ou no component.scss */
+.ticket {
+margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+
 }
 
-button { display: none; }
+.logo {
+  width: 200px;
+  margin-bottom: -5px;
+}
 
- img {
-          max-width: 25%;
-        }
+.title {
+
+  font-size: 86px;
+  margin-top: 0px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.title-secundary{
+  font-size: 0.75rem /* 12px */;
+    line-height: 1rem
+    margin-top: 0px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+.title-ter{
+  font-size: 12px /* 12px */;
+    line-height: 1rem
+    margin-top: 10px;
+  margin-top: 10px;
+}
+
+.footer {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
 
         </style>
       `;
