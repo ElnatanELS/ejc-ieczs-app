@@ -51,7 +51,7 @@
       </div>
       <div class="relative flex mt-2 w-full">
         <span class="pr-3">Data de Criação:</span>
-        <span>{{ userSelected?.yearCreated | date : "dd/MM/yyyy" }}</span>
+        <span>{{ userSelected?.yearCreated | date : "dd/MM/yyyy hh:mm" }}</span>
       </div>
 
       <div class="relative mt-2 w-full">
@@ -77,24 +77,5 @@
 </app-modal>
 
 
-<div class="hidden" id="recibo">
-  <div class="hidden">
-    <div class="relative mt-16 w-full flex justify-center" >
-      <img src="../../../../../assets/img/logo-preto.png" class="flex " alt="">
-    </div>
+<app-chips [user]="userSelected" class="hidden" id="recibo"></app-chips>
 
-  </div>
-  <div class="relative mt-16 w-full flex justify-center">
-    <span class="text-8xl">{{ userSelected?.numeroInscricao }}</span>
-  </div>
-  <div class="relative mt-2 w-full flex justify-center">
-    <span class="text-xs">seu numero para o sorteio de ficha.</span>
-  </div>
-
-  <div class="relative mt-16 w-full flex justify-center">
-    <h1 class="text-base font-bold text-neutral-900 text-center">
-      A data do nosso EJC será dias
-      <span class="text-primary_color/50">13, 14 e 15 de Junho</span>.
-    </h1>
-  </div>
-</div>

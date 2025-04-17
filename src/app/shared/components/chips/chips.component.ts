@@ -8,7 +8,6 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ChipsComponent implements OnInit {
 
   @Input() user: any = <any>{};
-
   constructor() { }
 
   ngOnInit() {
