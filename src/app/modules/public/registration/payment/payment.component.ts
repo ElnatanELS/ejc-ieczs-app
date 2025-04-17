@@ -14,6 +14,8 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   inscricao:any;
 
+  lista = ['Bandinha']
+
   constructor(public router: Router,private _localStore: LocalStorageService, private _registrationService: RegistrationService) { }
 
   ngOnInit() {
@@ -21,7 +23,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
     if (!this.inscricao?.id) {
       this.router.navigate(['/'])
     }
-    if (this.inscricao?.stt == 2) {
+    if (this.inscricao?.data.stt == 2 || this.inscricao?.data.stt == 3) {
       this.router.navigate(['/inscricao/confirmacao']);
     }
 
@@ -30,7 +32,11 @@ export class PaymentComponent implements OnInit, OnDestroy {
     this._localStore.remove('USER');
   }
   goToRegistration() {
-    this._registrationService.update(this.inscricao.id,{stt:2}).then((res:any)=>{
+
+    const status = {stt: this.lista.includes(this.inscricao.data.equipe) ? 2 : 3}
+
+    this._registrationService.update(this.inscricao.id,
+      status).then((res:any)=>{
       console.log(res)
       this.router.navigate(['/inscricao/confirmacao']);
     })

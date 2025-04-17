@@ -22,6 +22,12 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.inscricao = this._localStore.get('USER');
+    if (!this.inscricao?.id) {
+      this.router.navigate(['/'])
+    }
+    if (this.inscricao?.data.stt == 1 ) {
+      this.router.navigate(['/inscricao/pagamento']);
+    }
     this.inscricao = {
       ...this.inscricao,
       data: {
@@ -31,9 +37,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
           .padStart(4, '0'),
       },
     };
-    if (!this.inscricao?.id) {
-      this.router.navigate(['/']);
-    }
+
   }
   goToRegistration() {
     this.router.navigate(['registration']);

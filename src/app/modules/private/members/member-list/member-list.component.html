@@ -42,12 +42,16 @@
         <span>{{ userSelected?.igreja }}</span>
       </div>
       <div class="relative flex mt-2 w-full">
+        <span class="pr-3">Rede Social:</span>
+        <span>{{ userSelected?.redeSocial }}</span>
+      </div>
+      <div class="relative flex mt-2 w-full">
         <span class="pr-3">Equipe:</span>
         <span>{{ userSelected?.equipe }}</span>
       </div>
       <div class="relative flex mt-2 w-full">
         <span class="pr-3">Data de Criação:</span>
-        <span>{{ userSelected?.createdAt | date : "dd/MM/yyyy" }}</span>
+        <span>{{ userSelected?.yearCreated | date : "dd/MM/yyyy" }}</span>
       </div>
 
       <div class="relative mt-2 w-full">

@@ -12,7 +12,7 @@ export class SnackbarService {
     this._snackBar.open(msg, '', {
       horizontalPosition: 'right',
       verticalPosition: 'top',
-      duration:50000,
+      duration:5000,
        panelClass: [`snackbar-type-soft-${type}`]
 
     });

@@ -32,11 +32,14 @@ export class FirstAcessRegistrationComponent implements OnInit {
     igreja: [''],
     cel: [''],
     equipe: [''],
+    redeSocial: [''],
   });
 
   loading = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._localStore.clear()
+  }
 
   validate() {
     this.loading = true;
@@ -46,10 +49,12 @@ export class FirstAcessRegistrationComponent implements OnInit {
       this.form.controls.cracha.setValidators([Validators.required]);
       this.form.controls.sexo.setValidators([Validators.required]);
       this.form.controls.cel.setValidators([Validators.required]);
+      this.form.controls.igreja.setValidators([Validators.required]);
+      this.form.controls.equipe.setValidators([Validators.required]);
+      this.form.controls.redeSocial.setValidators([Validators.required]);
       this._registrationService
         .filterCpf(String(this.form.controls.cpf.value).trim())
         .subscribe((res: any) => {
-          console.log(res);
 
 
           if (res[0]) {
@@ -58,9 +63,8 @@ export class FirstAcessRegistrationComponent implements OnInit {
               id: res[0]?.id,
               data: res[0],
             });
-            console.log(res[0]);
 
-            if (res[0]?.stt == 2) {
+            if (res[0]?.stt == 2 || res[0]?.stt == 3) {
               this.router.navigate(['/inscricao/confirmacao']);
 
             }
@@ -98,7 +102,6 @@ export class FirstAcessRegistrationComponent implements OnInit {
           stt: 1,
         })
         .subscribe((res) => {
-          console.log('resd',res);
 
           this._snackBarService.openSnackBar(
             'Inscrição feita com sucesso',
