@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { data } from 'autoprefixer';
 import { LocalStorageService } from 'src/app/shared/services/localStorage/local-storage.service';
 
 @Component({
@@ -21,6 +22,15 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.inscricao = this._localStore.get('USER');
+    this.inscricao = {
+      ...this.inscricao,
+      data: {
+        ...this.inscricao.data,
+        numeroInscricao: this.inscricao.data.numeroInscricao
+          .toString()
+          .padStart(4, '0'),
+      },
+    };
     if (!this.inscricao?.id) {
       this.router.navigate(['/']);
     }
@@ -41,7 +51,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
 
         /* CSS global ou no component.scss */
 .ticket {
-margin: 0;
+margin-top: 0px;
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
 

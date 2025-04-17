@@ -19,7 +19,7 @@
     <div class="relative mt-2 w-full flex justify-center">
       <span class="text-xs">seu numero para o sorteio de ficha.</span>
     </div>
-    <div class="relative mt-2 w-full flex justify-center">
+    <div class="relative mt-2 w-full hidden md:flex justify-center">
       <eels-progress-bar *ngIf="loading"></eels-progress-bar>
       <eels-button text="imprimir" (clickEvent)="printRecibo()"></eels-button>
     </div>
