@@ -10,15 +10,21 @@ import { TableActionComponent } from './components/table-action/table-action.com
 import { TableFooterComponent } from './components/table-footer/table-footer.component';
 import { TableRowComponent } from './components/table-row/table-row.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { EelsSelectModule } from '../inputs/eels-select/eels-select.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatIconModule,
     AngularSvgIconModule.forRoot(),
+    NgxPaginationModule,
+    EelsSelectModule
   ],
   declarations: [
     TableComponent,

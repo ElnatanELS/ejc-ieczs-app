@@ -17,25 +17,108 @@
   </div>
 </div> -->
 
-<div class=" bg-white flex min-w-full flex-col rounded-xl  p-2">
+<div class="bg-white flex min-w-full flex-col rounded-xl p-2">
   <app-table-action></app-table-action>
   <div
-    class="scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary_color grow overflow-x-auto px-5">
+    class="scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary_color grow overflow-x-auto px-5"
+  >
     <table
-      class="text-primary_color table w-full table-auto border-collapse border-0 text-left align-middle leading-5">
-      <thead class="border-primary_color/20 text-primary_color  text-xs">
-        <tr  >
-          <app-table-header class="contents" [columns]="displayToColumns"></app-table-header>
+      class="text-primary_color table w-full table-auto border-collapse border-0 text-left align-middle leading-5"
+    >
+      <thead class="border-primary_color/20 text-primary_color text-xs">
+        <tr>
+          <app-table-header
+            class="contents"
+            [columns]="displayToColumns"
+          ></app-table-header>
         </tr>
       </thead>
       <tbody>
-        <tr class="hover:bg-card/50" *ngFor="let user of this.dataSource.items" >
-          <app-table-row [columns]="displayToColumns" [user]="user" (userSelected)="viewButton($event)" class="contents"></app-table-row>
-
+        <tr
+          class="hover:bg-card/50"
+          *ngFor="
+            let user of this.dataSource.items
+              | paginate : { itemsPerPage: itens, currentPage: config.currentPage }
+          "
+        >
+          <app-table-row
+            [columns]="displayToColumns"
+            [user]="user"
+            (userSelected)="viewButton($event)"
+            class="contents"
+          ></app-table-row>
         </tr>
-
       </tbody>
     </table>
   </div>
-  <app-table-footer></app-table-footer>
+  <div
+    class="text-muted-foreground flex flex-wrap items-center justify-between gap-2 py-3 px-5 text-xs"
+  >
+    <div class="order-2 flex items-center gap-2 md:order-1">
+      Exibir
+      <select class="w-16 p-2" [(ngModel)]="itens">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+      </select>
+      por página
+    </div>
+    <pagination-template
+      #p="paginationApi"
+      (pageChange)="config.currentPage = $event"
+    >
+      <div class="order-1 flex items-center gap-4 md:order-2">
+        <!-- <span
+          >{{ p.getFirstItemIndex() + 1 }}-{{ p.getLastItemIndex() + 1 }} of
+          {{ p.totalItems }}</span
+        > -->
+
+        <div class="inline-flex items-center gap-1">
+          <!-- Botão anterior -->
+          <button
+            class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm disabled:opacity-50"
+            [disabled]="p.isFirstPage()"
+            (click)="p.previous()"
+          >
+            <svg-icon
+              src="./assets/icons/heroicons/outline/arrow-long-left.svg"
+              [svgClass]="'h-4 w-4'"
+            ></svg-icon>
+          </button>
+
+          <!-- Páginas -->
+          <ng-container *ngFor="let page of p.pages">
+            <button
+              *ngIf="p.getCurrent() !== page.value"
+              (click)="p.setCurrent(page.value)"
+              class="hover:bg-muted-foreground/10 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm"
+            >
+              {{ page.label }}
+            </button>
+
+            <button
+              *ngIf="p.getCurrent() === page.value"
+              class="bg-muted-foreground/10 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm"
+            >
+              {{ page.label }}
+            </button>
+          </ng-container>
+
+          <!-- Botão próximo -->
+          <button
+            class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm disabled:opacity-50"
+            [disabled]="p.isLastPage()"
+            (click)="p.next()"
+          >
+            <svg-icon
+              src="./assets/icons/heroicons/outline/arrow-long-right.svg"
+              [svgClass]="'h-4 w-4'"
+            ></svg-icon>
+          </button>
+        </div>
+      </div>
+    </pagination-template>
+  </div>
 </div>

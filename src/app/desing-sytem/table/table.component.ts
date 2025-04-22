@@ -9,7 +9,7 @@ import {
   Output,
   signal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { TableActionComponent } from './components/table-action/table-action.component';
 import { TableFooterComponent } from './components/table-footer/table-footer.component';
@@ -19,6 +19,7 @@ import { User } from './model/user.model';
 import { TableFilterService } from './services/table-filter.service';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { PaginationInstance } from 'ngx-pagination';
 
 @Component({
   selector: 'app-table',
@@ -26,6 +27,16 @@ import { Sort } from '@angular/material/sort';
 })
 export class TableComponent implements OnInit, OnChanges {
   users = signal<any[]>([]);
+  page: any = 1
+  itens: any = 10
+
+  public config: PaginationInstance = {
+    id: 'custom',
+    itemsPerPage: 10,
+    currentPage: 1
+};
+
+
 
   @Input() actions: any = {
     view: true,
@@ -85,7 +96,8 @@ export class TableComponent implements OnInit, OnChanges {
 
   constructor(
     private http: HttpClient,
-    private filterService: TableFilterService
+    private filterService: TableFilterService,
+    private _formBuilder: FormBuilder,
   ) {}
 
   public toggleUsers(checked: boolean) {

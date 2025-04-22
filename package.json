@@ -28,6 +28,7 @@
     "firebase": "^9.22.1",
     "ng2-charts": "^5.0.0",
     "ngx-mask": "^16.4.2",
+    "ngx-pagination": "^6.0.3",
     "postcss": "^8.4.23",
     "rxjs": "^7.8.0",
     "tslib": "^2.5.0",
