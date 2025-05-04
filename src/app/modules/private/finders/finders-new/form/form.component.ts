@@ -40,18 +40,15 @@ export class FormComponent implements OnInit {
         uf: ['', Validators.required],
         cep: ['', Validators.required],
         cel: ['', Validators.required],
-        redeSocial: [''],
-        religiao: [''],
+        redeSocial: ['', Validators.required],
+        religiao: ['', Validators.required],
         temAlergia: ['', Validators.required],
         alergia: [''],
         temMedicamento: ['', Validators.required],
         medicamento: [''],
         temDoenca: ['', Validators.required],
         doenca: [''],
-        nomeDosPaisAdotivos: ['', Validators.required],
-        telDosPaisAdotivos: ['', Validators.required],
-        quemConvidou: ['', Validators.required],
-        telQuemConvidou: ['', Validators.required],
+
       });
 
       loading = false;

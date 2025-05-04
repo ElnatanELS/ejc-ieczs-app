@@ -11,6 +11,8 @@ import { FindersListComponent } from './finders-list.component';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { ModalModule } from 'src/app/shared/components/modal/modal.module';
 import { FinderPressComponent } from '../shared/finder-press/finder-press.component';
+import { FormsModule } from '@angular/forms';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import { FinderPressComponent } from '../shared/finder-press/finder-press.compon
        WrapperModule,
        TableModule,
       ModalModule,
+      FormsModule,
+      AngularSvgIconModule.forRoot(),
 
        // EelsTableModule,
        RouterModule.forChild([

@@ -17,123 +17,164 @@
 >
   <div class="flex flex-col justify-center items-center w-full">
     <div class="w-full">
-      <h3>Dados do Encontrista</h3>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Nome Completo:</span>
-        <span>{{ userSelected?.nome }}</span>
-      </div>
-      <div class="relative mt-2 w-full flex flex-col md:flex-row">
-        <div class="flex flex-col md:flex-row gap-4 w-full">
-          <span class="pr-3">Nome do Crachá:</span>
-          <span>{{ userSelected?.cracha }}</span>
+      <ng-container *ngIf="userSelected?.stt !== 4">
+        <h3>Dados do Encontrista</h3>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Nome Completo:</span>
+          <span>{{ userSelected?.nome }}</span>
         </div>
-
-        <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
-          <span class="pr-3">Sexo:</span>
-          <span>{{ userSelected?.sexo }}</span>
-        </div>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Data de Nascimento:</span>
-        <span>{{ userSelected?.dataNascimento | date : "dd/MM/yyyy" }}</span>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Celular:</span>
-        <span>{{ userSelected?.avatar?.cel }}</span>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Religão:</span>
-        <span>{{ userSelected?.religiao }}</span>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Rede Social:</span>
-        <span>{{ userSelected?.redeSocial }}</span>
-      </div>
-      <div class="relative mt-2 w-full flex flex-col md:flex-row">
-        <h4>Tem Alergia?</h4>
-        <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
-          <span>{{ userSelected?.temAlergia }}</span>
+        <div class="relative mt-2 w-full flex flex-col md:flex-row">
+          <div class="flex flex-col md:flex-row gap-4 w-full">
+            <span class="pr-3">Nome do Crachá:</span>
+            <span>{{ userSelected?.cracha }}</span>
+          </div>
 
           <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
-            <span class="pr-3">Qual?</span>
-            <span *ngIf="userSelected?.temAlergia === 'Sim'">{{
-              userSelected?.alergia
-            }}</span>
+            <span class="pr-3">Sexo:</span>
+            <span>{{ userSelected?.sexo }}</span>
           </div>
         </div>
-      </div>
-      <div class="relative mt-2 w-full flex flex-col md:flex-row">
-        <h4>Tem Alguma doença?</h4>
-        <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
-          <span>{{ userSelected?.temDoenca }}</span>
-
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Data de Nascimento:</span>
+          <span>{{ userSelected?.dataNascimento | date : "dd/MM/yyyy" }}</span>
+        </div>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Celular:</span>
+          <span>{{ userSelected?.avatar?.cel }}</span>
+        </div>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Religão:</span>
+          <span>{{ userSelected?.religiao }}</span>
+        </div>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Rede Social:</span>
+          <span>{{ userSelected?.redeSocial }}</span>
+        </div>
+        <div class="relative mt-2 w-full flex flex-col md:flex-row">
+          <h4>Tem Alergia?</h4>
           <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
-            <span class="pr-3">Qual?</span>
-            <span *ngIf="userSelected?.temDoenca === 'Sim'">{{
-              userSelected?.doenca
-            }}</span>
+            <span>{{ userSelected?.temAlergia }}</span>
+
+            <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+              <span class="pr-3">Qual?</span>
+              <span *ngIf="userSelected?.temAlergia === 'Sim'">{{
+                userSelected?.alergia
+              }}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Rede Social:</span>
-        <span>{{ userSelected?.redeSocial }}</span>
-      </div>
+        <div class="relative mt-2 w-full flex flex-col md:flex-row">
+          <h4>Tem Alguma doença?</h4>
+          <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+            <span>{{ userSelected?.temDoenca }}</span>
 
-      <hr class="my-6 border-gray-300 w-full" />
-      <h2>Endereço:</h2>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">CEP:</span>
-        <span>{{ userSelected?.cep }}</span>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Rua:</span>
-        <span>{{ userSelected?.rua }}</span>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Número:</span>
-        <span>{{ userSelected?.numero }}</span>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Bairro:</span>
-        <span>{{ userSelected?.bairro }}</span>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Cidade:</span>
-        <span>{{ userSelected?.cidade }}</span>
-      </div>
-      <div class="relative mt-2 w-full">
-        <span class="pr-3">Estado:</span>
-        <span>{{ userSelected?.estado }}</span>
-      </div>
-      <hr class="my-6 border-gray-300 w-full" />
+            <div class="flex flex-col md:flex-row gap-4 w-full justify-center">
+              <span class="pr-3">Qual?</span>
+              <span *ngIf="userSelected?.temDoenca === 'Sim'">{{
+                userSelected?.doenca
+              }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Rede Social:</span>
+          <span>{{ userSelected?.redeSocial }}</span>
+        </div>
 
+        <hr class="my-6 border-gray-300 w-full" />
+        <h2>Endereço:</h2>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">CEP:</span>
+          <span>{{ userSelected?.cep }}</span>
+        </div>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Rua:</span>
+          <span>{{ userSelected?.rua }}</span>
+        </div>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Número:</span>
+          <span>{{ userSelected?.numero }}</span>
+        </div>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Bairro:</span>
+          <span>{{ userSelected?.bairro }}</span>
+        </div>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Cidade:</span>
+          <span>{{ userSelected?.cidade }}</span>
+        </div>
+        <div class="relative mt-2 w-full">
+          <span class="pr-3">Estado:</span>
+          <span>{{ userSelected?.estado }}</span>
+        </div>
+        <hr class="my-6 border-gray-300 w-full" />
+      </ng-container>
       <div class="relative mt-7 w-full">
         <h2>Sobre os Pais adotivos</h2>
 
-        <span class="pr-3">Nome dos Pais adotivos:</span>
-        <span>{{ userSelected?.nomeDosPaisAdotivos }}</span>
+        <div class="flex md:flex-row gap-4 w-full my-4">
+          <div class="flex flex-col md:flex-row gap-4 w-full">
+            <span class="pr-3">Nome do Pai adotivo:</span>
+            <span>{{ userSelected?.pai?.nome }}</span>
+          </div>
 
-        <div>
-          <span class="pr-3">Celular:</span>
-          <span>{{ userSelected?.telDosPaisAdotivos }}</span>
+          <div class="flex flex-col md:flex-row gap-4 w-1/4">
+            <span class="pr-3">Celular:</span>
+            <span>{{ userSelected?.pai?.cel }}</span>
+          </div>
+          <div>
+            <svg-icon
+              src="./../assets/icons/heroicons/solid/add-circle.svg"
+              [svgClass]="'h-7 w-7 text-primary_color cursor-pointer'"
+              (click)="abrirModalMudar('pai')"
+            >
+            </svg-icon>
+          </div>
         </div>
+        <div class="flex md:flex-row gap-4 w-full">
+          <div class="flex flex-col md:flex-row gap-4 w-full">
+            <span class="pr-3">Nome da Mãe adotiva:</span>
+            <span>{{ userSelected?.mae?.nome }}</span>
+          </div>
+
+          <div class="flex flex-col md:flex-row gap-4 w-1/4">
+            <span class="pr-3">Celular:</span>
+            <span>{{ userSelected?.mae?.cel }}</span>
+          </div>
+          <div>
+            <svg-icon
+              src="./../assets/icons/heroicons/solid/add-circle.svg"
+              [svgClass]="'h-7 w-7 text-primary_color cursor-pointer'"
+              (click)="abrirModalMudar('mae')"
+            ></svg-icon>
+          </div>
+        </div>
+
         <hr class="my-6 border-gray-300 w-full" />
       </div>
 
       <div class="relative mt-7 w-full">
-        <h2>Quem convido você?"</h2>
-        <span class="pr-3">Nome:</span>
-        <span>{{ userSelected?.quemConvidou }}</span>
-
-        <div>
-          <span class="pr-3">Celular:</span>
-          <span>{{ userSelected?.telQuemConvidou }}</span>
+        <h2>Rensposavel da Ficha</h2>
+        <div class="flex md:flex-row gap-4 w-full">
+          <div class="flex flex-col md:flex-row gap-4 w-full">
+            <span class="pr-3">Nome:</span>
+            <span>{{ userSelected?.responsavel?.nome }}</span>
+          </div>
+          <div class="flex flex-col md:flex-row gap-4 w-full">
+            <span class="pr-3">Celular:</span>
+            <span>{{ userSelected?.responsavel?.cel }}</span>
+          </div>
+          <div>
+            <svg-icon
+              src="./../assets/icons/heroicons/solid/add-circle.svg"
+              [svgClass]="'h-7 w-7 text-primary_color cursor-pointer'"
+              (click)="abrirModalMudar('responsavel')"
+            ></svg-icon>
+          </div>
         </div>
         <hr class="my-6 border-gray-300 w-full" />
       </div>
     </div>
-
 
     <app-finder-press
       [user]="userSelected"
@@ -165,5 +206,32 @@
         >
         <span class="text-primary_color/50 font-bold">Entrar</span></a
       > -->
+  </div>
+</app-modal>
+
+<app-modal
+  [isOpen]="modalAbertoMudar"
+  [title]="'Selecionar ' + type"
+  class="max-w-[90%] h-[50%] overflow-y-auto"
+  (closed)="fecharModalMudar()"
+>
+  <div class="relative mt-2 w-full">
+    <h2>Selecione um Registro</h2>
+    <input
+      type="text"
+      class="w-full p-2 border border-gray-300 rounded"
+      placeholder="Digite para buscar..."
+      [(ngModel)]="searchTerm"
+      (input)="filterRegistrations()"
+    />
+    <ul class="mt-2 max-h-40 overflow-y-auto border border-gray-300 rounded">
+      <li
+        *ngFor="let registration of filteredRegistrations"
+        class="p-2 cursor-pointer hover:bg-gray-200"
+        (click)="selectRegistration(registration)"
+      >
+        {{ registration.nome }}
+      </li>
+    </ul>
   </div>
 </app-modal>

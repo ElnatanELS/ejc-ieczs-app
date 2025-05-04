@@ -2,6 +2,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FindersServiceService } from '../service/finders-service.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service';
+import { RegistrationService } from 'src/app/modules/public/registration/registration.service';
 
 @Component({
   selector: 'app-finders-list',
@@ -30,11 +31,12 @@ import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.servi
   ],
 })
 export class FindersListComponent implements OnInit {
+  registrations: any[] = []; // Declare and initialize the registrations property
   columns = {
     numeroInscricao: 'Número de Inscrição',
     nome: 'Nome do Encontrista',
     stt: 'Status',
-    quemConvidou: 'Responsável',
+    responsavelTable: 'Responsável',
     actions: 'actions',
   };
 
@@ -43,10 +45,18 @@ export class FindersListComponent implements OnInit {
   };
 
   userSelected: any = <any>{};
+  searchTerm: any;
+  filteredRegistrations: any[] = [];
+  type: string ='';
 
-  constructor(private _findersService: FindersServiceService, private _snackService:SnackbarService) {}
+  constructor(
+    private _findersService: FindersServiceService,
+    private _snackService: SnackbarService,
+    private _registrationService: RegistrationService
+  ) {}
 
   modalAberto = false;
+  modalAbertoMudar = false;
 
   setModal(user: any) {
     console.log(user);
@@ -60,22 +70,58 @@ export class FindersListComponent implements OnInit {
   abrirModal() {
     this.modalAberto = true;
   }
+  abrirModalMudar(type:string) {
+    this.modalAbertoMudar = true;
+    if(type == 'pai') {
+      this.type = "Pai adotivo";
+    } else if(type == 'mae') {
+      this.type = "Mãe adotiva";
+    }
+    else if(type == 'responsavel') {
+      this.type = "Responsável";
+    }
+  }
 
   fecharModal() {
     this.modalAberto = false;
   }
+  fecharModalMudar() {
+    this.modalAbertoMudar = false;
+  }
 
   ngOnInit() {
-
     this._findersService.read().subscribe((res: any) => {
       this.dataSource.items = res
         .map((item: any) => {
           return {
+            ...item,
+            responsavelTable: item.responsavel?.nome,
+            numeroInscricao: String(item.numeroInscricao).padStart(4, '0'),
+          };
+        })
+        .sort((a: any, b: any) =>
+          a.numeroInscricao.localeCompare(b.numeroInscricao)
+        );
+    });
+
+    this._registrationService.read().subscribe((res: any) => {
+      this.registrations = res
+        .filter((item: any) => item.stt === 2 || item.stt === 3)
+        .map((item: any) => {
+          return {
         ...item,
         numeroInscricao: String(item.numeroInscricao).padStart(4, '0'),
+        avatar: {
+          nome: item.nome,
+          cel: `(${item.cel.replace(/[^0-9]/g, '').slice(0, 2)}) ${item.cel.replace(/[^0-9]/g, '').slice(2, 6)}-${item.cel.replace(/[^0-9]/g, '').slice(6)}`,
+        },
+        cpf: item.cpf.replace(/[^0-9]/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'),
           };
         })
         .sort((a: any, b: any) => a.numeroInscricao.localeCompare(b.numeroInscricao));
+      this.filteredRegistrations = this.registrations; // Initialize filteredRegistrations
+      this.filterRegistrations(); // Call the filter method to initialize the filtered list
+
     });
   }
 
@@ -202,10 +248,53 @@ input, textarea {
 
   changeStt(id: string, stt: number) {
     this._findersService.update(id, { stt: stt }).then((res: any) => {
-      this._snackService.openSnackBar('Status atualizado com sucesso!', 'success');
+      this._snackService.openSnackBar(
+        'Status atualizado com sucesso!',
+        'success'
+      );
       this.fecharModal();
     });
   }
 
+  // Add this method to fix the error
+  filterRegistrations(): void {
+    this.filteredRegistrations = this.registrations.filter((registration) =>
+      registration.nome.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
 
+  // Method to handle registration selection
+  selectRegistration(registration: any): void {
+    console.log('Selected registration:', registration);
+    if (this.type == 'Pai adotivo') {
+      this._findersService.update(this.userSelected.id, { pai: registration }).then((res: any) => {
+        this._snackService.openSnackBar(
+          'Pai aditivo atualizado com sucesso!',
+          'success'
+        );
+        this.userSelected =  {...this.userSelected, pai: registration };
+        this.fecharModalMudar();
+      });
+    }
+    else if (this.type == 'Mãe adotiva') {
+      this._findersService.update(this.userSelected.id, { mae: registration }).then((res: any) => {
+        this._snackService.openSnackBar(
+          'Mãe adotiva atualizado com sucesso!',
+          'success'
+        );
+        this.userSelected =  {...this.userSelected, mae: registration };
+        this.fecharModalMudar();
+      });
+    }
+    else if (this.type == 'Responsável') {
+      this._findersService.update(this.userSelected.id, { responsavel: registration }).then((res: any) => {
+        this._snackService.openSnackBar(
+          'Responsável atualizado com sucesso!',
+          'success'
+        );
+        this.userSelected =  {...this.userSelected, responsavel: registration };
+        this.fecharModalMudar();
+      });
+    }
+  }
 }
