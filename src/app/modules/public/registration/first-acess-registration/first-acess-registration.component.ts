@@ -27,6 +27,7 @@ export class FirstAcessRegistrationComponent implements OnInit {
   form = this._formBuilder.group({
     cpf: ['', [Validators.required, cpfValidator()]],
     nome: [''],
+    email: [''],
     cracha: [''],
     sexo: [''],
     igreja: [''],
@@ -36,6 +37,29 @@ export class FirstAcessRegistrationComponent implements OnInit {
   });
 
   loading = false;
+
+  equipeOptions = [
+    { display: 'Bandinha', id: 'Bandinha' },
+    { display: 'Boa Vontade', id: 'Boa Vontade' },
+    { display: 'Lanchinho', id: 'Lanchinho' },
+    { display: 'Trânsito', id: 'Trânsito' },
+    { display: 'Sociodrama', id: 'Sociodrama' },
+    { display: 'EDG', id: 'EDG' },
+    { display: 'Secretaria', id: 'Secretaria' },
+    { display: 'Recepção', id: 'Recepção' },
+    { display: 'Garçons', id: 'Garçons' },
+    { display: 'Ordem', id: 'Ordem' },
+    { display: 'Cozinha e Mini Mercado', id: 'Cozinha e Mini Mercado' },
+    { display: 'Lanchonete', id: 'Lanchonete' },
+    { display: 'Compras', id: 'Compras' },
+    { display: 'Som', id: 'Som' },
+    { display: 'Círculos', id: 'Círculos' },
+    { display: 'Externa', id: 'Externa' },
+    { display: 'Vigília', id: 'Vigília' },
+    { display: 'Ornamentação', id: 'Ornamentação' },
+    { display: 'Equipe Médica', id: 'Equipe Médica' },
+    { display: 'Casal Apresentador', id: 'Casal Apresentador' },
+  ];
 
   ngOnInit(): void {
     this._localStore.clear()
@@ -50,6 +74,7 @@ export class FirstAcessRegistrationComponent implements OnInit {
       this.form.controls.sexo.setValidators([Validators.required]);
       this.form.controls.cel.setValidators([Validators.required]);
       this.form.controls.igreja.setValidators([Validators.required]);
+      this.form.controls.email.setValidators([Validators.required, Validators.email]);
       this.form.controls.equipe.setValidators([Validators.required]);
       this.form.controls.redeSocial.setValidators([Validators.required]);
       this._registrationService

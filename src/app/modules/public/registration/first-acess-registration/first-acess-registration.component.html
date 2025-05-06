@@ -53,6 +53,14 @@
       </div>
       <div class="relative mt-2 w-full">
         <eels-input
+          label="E-mail"
+
+          typeInput="text"
+          [controlForm]="form.controls.email"
+        ></eels-input>
+      </div>
+      <div class="relative mt-2 w-full">
+        <eels-input
           label="Igreja a qual pertence"
           typeInput="text"
           [controlForm]="form.controls.igreja"
@@ -61,7 +69,7 @@
       <div class="relative mt-2 w-full">
         <eels-select
           label="Equipe"
-          [options]="[{},{display:'Bandinha',id:'Bandinha'}, {display:'Lanchinho',id:'Lanchinho'},{display:'Boa Vontande',id:'Boa Vontande'},]"
+          [options]="equipeOptions"
           typeInput="text"
           [controlForm]="form.controls.equipe"
         ></eels-select>

@@ -1,0 +1,10 @@
+{
+  "/pagarme": {
+    "target": "https://api.pagar.me",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/pagarme": ""
+    }
+  }
+}
