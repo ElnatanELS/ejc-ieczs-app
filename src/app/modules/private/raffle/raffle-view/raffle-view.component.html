@@ -7,7 +7,7 @@
         class="animate-float w-64 lg:w-96"
       />
     </div>
-  <h1 class="text-4xl font-bold text-green-900 mb-6 animate-fade-in">Resultado do Sorteio</h1>
+  <h1 class="text-4xl font-bold text-green-900 mb-6 animate-fade-in mb-9">Resultado do Sorteio</h1>
 
   <div *ngIf="loading" class="text-5xl font-mono font-bold animate-pulse text-gray-700">
     {{ efeito }}
@@ -15,14 +15,24 @@
 
   <div
     *ngIf="!loading && vencedor"
-    class="text-[100px] font-extrabold text-green-700 animate-bounce transition duration-500"
+    class="text-[100px] grid font-extrabold text-green-700 animate-bounce transition duration-500"
   >
-    🎉 {{ vencedor.numeroInscricao }} 🎉
+  <span >🎉 {{ vencedor.numeroInscricao }} 🎉</span>
+    <span class="text-[50px] ">{{ vencedor.nome }}</span>
   </div>
 
   <p *ngIf="!loading && !vencedor" class="text-gray-600 mt-4">Aguardando novo sorteio...</p>
 
-  <div *ngIf="vencedor" class="mt-4 text-lg text-gray-700">
-    Restam <span class="font-bold text-[60px] text-green-800">{{ faltam }}</span> {{ faltam === 1 ? 'nome' : 'nomes' }} para serem sorteados.
+  <div class="flex w-[80%]  items-center justify-between mt-8">
+
+    <div *ngIf="vencedor" class="mt-4 text-lg text-gray-700 grid text-center w-[80%] ">
+      Restam <span class="font-bold text-[60px] text-green-800 my-2">{{ faltam }} / {{total}}</span> {{ faltam === 1 ? 'nome' : 'nomes' }} para serem sorteados.
+    </div>
+    <div *ngIf="ultimosNomes.length > 1 && !loading && vencedor" class="mt-8 w-full max-w-2xl">
+      <h2 class="text-2x1 font-semibold text-gray-800 mb-4">Últimos 10 nomes chamados:</h2>
+      <ul class="list-disc list-inside text-left text-gray-700">
+        <li *ngFor="let nome of ultimosNomes" class="text-3xl">{{ nome.nome }} / {{ nome.numeroInscricao }}</li>
+      </ul>
+    </div>
   </div>
 </div>

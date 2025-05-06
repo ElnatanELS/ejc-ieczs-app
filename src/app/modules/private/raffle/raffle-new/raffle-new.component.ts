@@ -12,11 +12,15 @@ export class RaffleNewComponent implements OnInit {
   vencedor: any | null = null;
   faltam = 0;
 
+  ultimosNomes: any[] = [];
+
   ngOnInit(): void {
     this._raffleService.getUltimoResultado().subscribe((s) => {
       if (s) {
         this.vencedor = s.vencedor;
         console.log(s);
+        this.ultimosNomes = s.jaSorteados;
+
 
         this.faltam = this._raffleService.maxSorteios - s.jaSorteados.length;
       }

@@ -7,7 +7,20 @@
   </button>
 
   <div *ngIf="vencedor">
-    Último sorteado: <strong>{{ vencedor.numeroInscricao }}</strong><br />
+    Último sorteado: <strong>{{ vencedor.nome }} / {{ vencedor.numeroInscricao }}</strong><br />
     Restam <strong>{{ faltam }}</strong> {{ faltam === 1 ? 'nome' : 'nomes' }}
+  </div>
+
+  <div class="w-full max-w-2xl bg-white shadow-md rounded-lg p-4">
+    <h2 class="text-lg font-bold mb-4">Últimos 10 nomes chamados</h2>
+    <ul class="list-disc list-inside">
+      <li *ngFor="let nome of ultimosNomes">{{ nome.nome }} / {{ nome.numeroInscricao }}</li>
+    </ul>
+  </div>
+
+  <div class="w-full max-w-2xl bg-white shadow-md rounded-lg p-4 mt-4">
+    <h2 class="text-lg font-bold mb-4">Estatísticas</h2>
+    <p>Total chamados: <strong>{{ ultimosNomes.length }}</strong></p>
+    <p>Restantes: <strong>{{ faltam }}</strong></p>
   </div>
 </div>

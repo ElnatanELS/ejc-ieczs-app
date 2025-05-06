@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable, first, map, switchMap } from 'rxjs';
+import { Observable, first, map, switchMap, take } from 'rxjs';
 import { RegistrationService } from '../../public/registration/registration.service';
 import { FindersServiceService } from '../finders/service/finders-service.service';
 
@@ -19,7 +19,7 @@ export class RaffleService {
 
   collection: string = 'finders';
   public lista = [];
-  public maxSorteios = 3;
+  public maxSorteios = 4;
 
   finders: Observable<any[]> | undefined;
 
@@ -34,7 +34,7 @@ export class RaffleService {
       ref.orderBy('createdAt', 'desc')
     );
     this._registrationService.read().subscribe((res: any) => {
-      this.lista = res.map((item: any) => {
+      this.lista = res.filter((item: any) => item.stt === 2 || item.stt === 3).map((item: any) => {
         return {
           ...item,
           numeroInscricao:String(item.numeroInscricao).padStart(4, '0') ,
@@ -95,13 +95,18 @@ export class RaffleService {
    */
   updateSorteio(data: any): Observable<void> {
     return this.generateSequentialId().pipe(
-      switchMap((numeroInscricao) =>
-        this._findersService.filterNumIns(numeroInscricao).pipe(
+      switchMap((numeroInscricao) => {
+        console.log('numeroInscricao', numeroInscricao);
+
+        return this._findersService.filterNumIns(numeroInscricao).pipe(
           switchMap((res: any) =>
-            this.firestore.doc(`finders/` + res.id).update(data)
+          {
+            console.log('res', res);
+            return this.firestore.doc(`finders/` + res[0].id).update(data)
+          }
           )
-        )
-      )
+        );
+      })
     );
   }
 
@@ -113,8 +118,14 @@ export class RaffleService {
     if (jaSorteados.length >= this.maxSorteios) {
       throw new Error(`Limite de ${this.maxSorteios} sorteios atingido.`);
     }
+    console.log('jaSorteados', jaSorteados);
+    console.log('lista', this.lista);
 
-    const disponiveis = this.lista.filter(n => !jaSorteados.includes(n));
+    const disponiveis = this.lista.filter((n: any) => !jaSorteados.some((sorteado:any) => sorteado.nome === n.nome));
+
+    console.log('disponiveis', disponiveis);
+
+
 
     if (disponiveis.length === 0) {
       throw new Error('Todos os nomes já foram sorteados.');
@@ -128,7 +139,7 @@ export class RaffleService {
       createdAt: new Date()
     };
 
-    this.updateSorteio({quemConvidou: vencedor?.nome, telQuemConvidou: vencedor?.cel}).subscribe(() => {
+    this.updateSorteio({responsavel:vencedor}).pipe(take(1)).subscribe(() => {
       console.log('Sorteio atualizado com sucesso!');
     }
     );
