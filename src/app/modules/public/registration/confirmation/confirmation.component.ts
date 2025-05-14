@@ -12,6 +12,8 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
   loading = false;
   inscricao: any;
 
+  lista = ['Bandinha','Boa Vontade','Lanchinho','Trânsito','Sociodrama']
+
   constructor(
     public router: Router,
     private _localStore: LocalStorageService

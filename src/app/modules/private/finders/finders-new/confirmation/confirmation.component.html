@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center items-center w-full">
   <h1 class="text-2xl md:text-3xl font-bold mt-9 text-neutral-900">
     Olá
-    <span class="text-primary_color/50">Teste!</span>
+    <span class="text-primary_color/50">{{inscricao.cracha}}</span>
     <!-- <span class="text-primary_color/50">{{ inscricao?.data?.cracha }}!</span> -->
   </h1>
   <h1 class="text-lg md:text-xl lg:text-2xl font-bold text-neutral-900">
@@ -37,4 +37,6 @@
       >
       <span class="text-primary_color/50 font-bold">Entrar</span></a
     > -->
+
+    <button (click)="teste()">teste</button>
 </div>

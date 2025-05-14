@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable, first, map, switchMap, take } from 'rxjs';
 import { RegistrationService } from '../../public/registration/registration.service';
@@ -19,7 +19,7 @@ export class RaffleService {
 
   collection: string = 'finders';
   public lista = [];
-  public maxSorteios = 4;
+  public maxSorteios = signal(50);
 
   finders: Observable<any[]> | undefined;
 
@@ -115,8 +115,8 @@ export class RaffleService {
     const jaSorteados = ultimo?.jaSorteados || [];
 
     // 🔒 Verifica se o limite foi atingido
-    if (jaSorteados.length >= this.maxSorteios) {
-      throw new Error(`Limite de ${this.maxSorteios} sorteios atingido.`);
+    if (jaSorteados.length >= this.maxSorteios()) {
+      throw new Error(`Limite de ${this.maxSorteios()} sorteios atingido.`);
     }
     console.log('jaSorteados', jaSorteados);
     console.log('lista', this.lista);

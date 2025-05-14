@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     loading = false;
 
     ngOnInit(): void {
+      this._auth.SignOutFinders()
     }
 
     redirectToHome(){

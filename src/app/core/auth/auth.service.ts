@@ -160,6 +160,7 @@ export class AuthService {
 
       localStorage.removeItem('user');
       localStorage.removeItem('USER');
+      localStorage.removeItem('inscricao');
       this.router.navigate(['/inscricao-encontrista']);
     });
   }

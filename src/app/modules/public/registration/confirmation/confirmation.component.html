@@ -19,6 +19,11 @@
     <div class="relative mt-2 w-full flex justify-center">
       <span class="text-xs">seu numero para o sorteio de ficha.</span>
     </div>
+    <div *ngIf="lista.includes(this.inscricao.data.equipe)" class="relative mt-4 w-full flex justify-center">
+      <div class="bg-orange-500 text-white text-sm font-bold px-4 py-2 rounded">
+        Lembrete: Sua inscrição só estará confirmada após o mostrar a carta da sua igreja.
+      </div>
+    </div>
     <div class="relative mt-2 w-full hidden md:flex justify-center">
       <eels-progress-bar *ngIf="loading"></eels-progress-bar>
       <eels-button text="imprimir" (clickEvent)="printRecibo()"></eels-button>

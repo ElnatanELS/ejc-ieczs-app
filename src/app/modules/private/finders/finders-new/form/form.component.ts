@@ -56,6 +56,12 @@ export class FormComponent implements OnInit {
       inscricao:any ={}
   ngOnInit() {
     this.inscricao = this._localStore.get('inscricao');
+    if (!this.inscricao?.id) {
+      this.router.navigate(['/'])
+    }
+    if (this.inscricao?.stt == 5  ) {
+      this.router.navigate(['/inscricao-encontrista/confirmacao']);
+    }
   }
 
   create() {

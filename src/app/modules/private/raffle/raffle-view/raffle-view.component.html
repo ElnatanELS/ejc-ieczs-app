@@ -28,8 +28,8 @@
     <div *ngIf="vencedor" class="mt-4 text-lg text-gray-700 grid text-center w-[80%] ">
       Restam <span class="font-bold text-[60px] text-green-800 my-2">{{ faltam }} / {{total}}</span> {{ faltam === 1 ? 'nome' : 'nomes' }} para serem sorteados.
     </div>
-    <div *ngIf="ultimosNomes.length > 1 && !loading && vencedor" class="mt-8 w-full max-w-2xl">
-      <h2 class="text-2x1 font-semibold text-gray-800 mb-4">Últimos 10 nomes chamados:</h2>
+    <div *ngIf="ultimosNomes.length > 1 && !loading && vencedor" class="mt-8 w-full max-w-2xl max-h-64 overflow-auto">
+      <h2 class="text-2x1 font-semibold text-gray-800 mb-4">Últimos  nomes chamados:</h2>
       <ul class="list-disc list-inside text-left text-gray-700">
         <li *ngFor="let nome of ultimosNomes" class="text-3xl">{{ nome.nome }} / {{ nome.numeroInscricao }}</li>
       </ul>

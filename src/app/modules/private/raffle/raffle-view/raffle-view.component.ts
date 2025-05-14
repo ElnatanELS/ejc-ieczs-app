@@ -25,7 +25,7 @@ export class RaffleViewComponent implements OnInit {
     this.sorteio$.subscribe(s => {
       if (s?.vencedor) {
         this.loading = true;
-        this.ultimosNomes = s.jaSorteados;
+        this.ultimosNomes = s.jaSorteados.sort((a: any, b: any) => s.jaSorteados.indexOf(b) - s.jaSorteados.indexOf(a));
         // simula suspense de 2 segundos com números aleatórios
         const animInterval = setInterval(() => {
           this.efeito = Math.floor(Math.random() * 100) + 1;
@@ -34,8 +34,8 @@ export class RaffleViewComponent implements OnInit {
         setTimeout(() => {
           clearInterval(animInterval);
           this.vencedor = s.vencedor;
-          this.faltam = this._raffleService.maxSorteios - s.jaSorteados.length;
-          this.total = this._raffleService.maxSorteios ;
+          this.faltam = this._raffleService.maxSorteios() - s.jaSorteados.length;
+          this.total = this._raffleService.maxSorteios() ;
           this.efeito = null;
           this.loading = false;
         }, 2000);

@@ -73,7 +73,7 @@ export class FirstAcessRegistrationComponent implements OnInit {
       this.form.controls.cracha.setValidators([Validators.required]);
       this.form.controls.sexo.setValidators([Validators.required]);
       this.form.controls.cel.setValidators([Validators.required]);
-      this.form.controls.igreja.setValidators([Validators.required]);
+      this.form.controls.igreja.setValidators([Validators.required, Validators.minLength(5)]);
       this.form.controls.email.setValidators([Validators.required, Validators.email]);
       this.form.controls.equipe.setValidators([Validators.required]);
       this.form.controls.redeSocial.setValidators([Validators.required]);

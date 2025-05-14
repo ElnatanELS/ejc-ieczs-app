@@ -11,7 +11,7 @@ export class RegistrationService {
 
   registrations: Observable<any[]> | undefined;
 
-  private apiUrl = '/pagarme/core/v5/orders';
+  private apiUrl = 'https://pagarme-ejc.onrender.com/api/pagarme/orders';
 
   private counterDoc = this.firestore.doc<{ numero: number }>(
     'inscricao/ultimaInscricao'
@@ -126,12 +126,13 @@ export class RegistrationService {
   }
   //  Para testes com Pix, na sua Dashboard vá em Configurações > meios de pagamento > Pix > modelo de negócio > Selecione "Simulator"
 
-  return this.http.post(this.apiUrl, body, { headers:this.headers });
+  return this.http.post(this.apiUrl, body);
 
   }
 
   getPaymentStatus(id: string) {
-    return this.http.get(`${this.apiUrl}/${id}`, { headers:this.headers });
+    return this.http.get(`${this.apiUrl}`,{
+      params: { order_id: id }});
 
   }
 }
