@@ -139,7 +139,7 @@ export class RaffleService {
       createdAt: new Date()
     };
 
-    this.updateSorteio({responsavel:vencedor}).pipe(take(1)).subscribe(() => {
+    this.updateSorteio({responsaveis:[vencedor]}).pipe(take(1)).subscribe(() => {
       console.log('Sorteio atualizado com sucesso!');
     }
     );

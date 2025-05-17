@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { ModalModule } from 'src/app/shared/components/modal/modal.module'; // Ensure this path is correct
 import { ChipsModule } from 'src/app/shared/components/chips/chips.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MemberListComponent],
@@ -24,6 +25,7 @@ import { ChipsModule } from 'src/app/shared/components/chips/chips.module';
     TableModule,
     ModalModule,
     ChipsModule,
+    FormsModule,
 
     // EelsTableModule,
     RouterModule.forChild([

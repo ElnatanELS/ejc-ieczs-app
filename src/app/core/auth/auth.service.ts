@@ -181,6 +181,20 @@ export class AuthService {
     });
   }
 
+  RegisterWithEmailAndPassword(email: string, password: string) {
+    return this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        if (result.user) {
+          this.SetUserData(result.user);
+          this._snackBarService.openSnackBar("Registro realizado com sucesso", 'success');
+        }
+      })
+      .catch((error) => {
+        this._snackBarService.openSnackBar("Erro ao registrar usuário", 'error');
+      });
+  }
+
 
 
 }

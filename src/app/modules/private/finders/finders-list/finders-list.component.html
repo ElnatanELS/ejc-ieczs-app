@@ -7,6 +7,13 @@
       (view)="setModal($event)"
     ></app-table>
   </app-wrapper>
+
+  <eels-button
+          class="w-full"
+          text="Imprimir "
+          (clickEvent)="adicionar()"
+        ></eels-button>
+
 </div>
 
 <app-modal
@@ -158,11 +165,11 @@
         <div class="flex md:flex-row gap-4 w-full">
           <div class="flex flex-col md:flex-row gap-4 w-full">
             <span class="pr-3">Nome:</span>
-            <span>{{ userSelected?.responsavel?.nome }}</span>
+            <span>{{ userSelected?.responsaveis?.[0]?.nome }}</span>
           </div>
           <div class="flex flex-col md:flex-row gap-4 w-full">
             <span class="pr-3">Celular:</span>
-            <span>{{ userSelected?.responsavel?.cel }}</span>
+            <span>{{ userSelected?.responsaveis?.[0]?.cel }}</span>
           </div>
           <div>
             <svg-icon
@@ -171,6 +178,18 @@
               (click)="abrirModalMudar('responsavel')"
             ></svg-icon>
           </div>
+        </div>
+
+        <div *ngIf="userSelected?.responsaveis?.length > 0" class="relative mt-2 w-full">
+          <h3>Lista de Responsáveis</h3>
+          <ul class="list-disc pl-5">
+            <li *ngFor="let responsavel of userSelected?.responsaveis">
+              <span class="pr-3">Nome:</span>
+              <span>{{ responsavel?.nome }}</span>
+              <span class="pr-3 ml-4">Celular:</span>
+              <span>{{ responsavel?.cel }}</span>
+            </li>
+          </ul>
         </div>
         <hr class="my-6 border-gray-300 w-full" />
       </div>
@@ -216,7 +235,7 @@
   (closed)="fecharModalMudar()"
 >
   <div class="relative mt-2 w-full">
-    <h2>Selecione um Registro</h2>
+    <h2>Selecione um Encontreiro</h2>
     <input
       type="text"
       class="w-full p-2 border border-gray-300 rounded"

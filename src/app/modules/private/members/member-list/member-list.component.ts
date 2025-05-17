@@ -46,6 +46,29 @@ export class MemberListComponent implements OnInit {
     actions:'actions',
   };
 
+  equipeOptions = [
+    { display: 'Bandinha', id: 'Bandinha' },
+    { display: 'Boa Vontade', id: 'Boa Vontade' },
+    { display: 'Lanchinho', id: 'Lanchinho' },
+    { display: 'Trânsito', id: 'Trânsito' },
+    { display: 'Sociodrama', id: 'Sociodrama' },
+    { display: 'EDG', id: 'EDG' },
+    { display: 'Secretaria', id: 'Secretaria' },
+    { display: 'Recepção', id: 'Recepção' },
+    { display: 'Garçons', id: 'Garçons' },
+    { display: 'Ordem', id: 'Ordem' },
+    { display: 'Cozinha e Mini Mercado', id: 'Cozinha e Mini Mercado' },
+    { display: 'Lanchonete', id: 'Lanchonete' },
+    { display: 'Compras', id: 'Compras' },
+    { display: 'Som', id: 'Som' },
+    { display: 'Círculos', id: 'Círculos' },
+    { display: 'Externa', id: 'Externa' },
+    { display: 'Vigília', id: 'Vigília' },
+    { display: 'Ornamentação', id: 'Ornamentação' },
+    { display: 'Equipe Médica', id: 'Equipe Médica' },
+    { display: 'Casal Apresentador', id: 'Casal Apresentador' },
+  ];
+
   dataSource: any = {
     items: [],
   };
@@ -55,6 +78,18 @@ export class MemberListComponent implements OnInit {
   constructor(private _registrationService: RegistrationService, private _snackService:SnackbarService) {}
 
   modalAberto = false;
+
+  equipeModalAberto = false;
+
+  novaEquipe: string = '';
+
+  openEquipeModal(): void {
+  this.equipeModalAberto = true;
+  }
+
+  fecharEquipeModal() {
+    this.equipeModalAberto = false;
+  }
 
   setModal(user:any) {
     console.log(user);
@@ -86,13 +121,32 @@ export class MemberListComponent implements OnInit {
           cpf: item.cpf.replace(/[^0-9]/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'),
         };
       }).sort((a: any, b: any) => a.numeroInscricao.localeCompare(b.numeroInscricao));;
+      this.dataSource.originalItems = this.dataSource.items
 
     });
   }
 
   changeStt(id: string, stt: number) {
-    this._registrationService.update(id, { stt: stt }).then((res: any) => {
+    let tipoDePagamento = ''
+    if (stt === 2){
+      tipoDePagamento = 'Dinheiro';
+    }
+    this._registrationService.update(id, { stt: stt, tipoDePagamento }).then((res: any) => {
       this._snackService.openSnackBar('Status atualizado com sucesso!', 'success');
+      this.fecharModal();
+    });
+  }
+
+  alterarEquipe(id: string) {
+    this._registrationService.update(id, { equipe: this.novaEquipe }).then((res: any) => {
+      this._snackService.openSnackBar('Equipe atualizada com sucesso!', 'success');
+      this.dataSource.originalItems = this.dataSource.items.map((item: any) => {
+        if (item.id === id) {
+          return { ...item, equipe: this.novaEquipe };
+        }
+        return item;
+      });
+      this.fecharEquipeModal();
       this.fecharModal();
     });
   }

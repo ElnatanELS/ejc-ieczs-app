@@ -90,7 +90,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   }
   goToRegistration() {
 
-    const status = {stt: this.lista.includes(this.inscricao.data.equipe) ? 2 : 3}
+    const status = {stt: this.lista.includes(this.inscricao.data.equipe) ? 2 : 3, tipoDePagamento: 'Pix'};
 
     this._registrationService.update(this.inscricao.id,
       status).then((res:any)=>{

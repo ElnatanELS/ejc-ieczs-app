@@ -48,10 +48,41 @@
       <div class="relative flex mt-2 w-full">
         <span class="pr-3">Equipe:</span>
         <span>{{ userSelected?.equipe }}</span>
+        <button class="ml-3 text-primary_color underline" (click)="openEquipeModal()">Alterar</button>
       </div>
+
+      <app-modal
+        [isOpen]="equipeModalAberto"
+        [title]="'Alterar Equipe'"
+        (closed)="fecharEquipeModal()"
+        class="max-w-md"
+      >
+        <div class="flex flex-col w-full">
+          <label for="equipeSelect" class="mb-2">Selecione a nova equipe:</label>
+          <select
+        id="equipeSelect"
+        class="w-full p-2 border rounded"
+        [(ngModel)]="novaEquipe"
+          >
+        <option *ngFor="let equipe of equipeOptions" [value]="equipe.id">
+          {{ equipe.display }}
+        </option>
+          </select>
+          <div class="mt-4 flex justify-end">
+        <eels-button
+          text="Salvar"
+          (clickEvent)="alterarEquipe(userSelected.id)"
+        ></eels-button>
+          </div>
+        </div>
+      </app-modal>
       <div class="relative flex mt-2 w-full">
         <span class="pr-3">Data de Criação:</span>
         <span>{{ userSelected?.yearCreated | date : "dd/MM/yyyy hh:mm" }}</span>
+      </div>
+      <div *ngIf="userSelected?.tipoDePagamento  " class="relative flex mt-2 w-full">
+        <span class="pr-3">Tipo de Pagamento:</span>
+        <span>{{ userSelected?.tipoDePagamento }}</span>
       </div>
 
       <div class="relative mt-2 w-full">

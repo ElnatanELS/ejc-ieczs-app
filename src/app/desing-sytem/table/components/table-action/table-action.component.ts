@@ -12,6 +12,8 @@ export class TableActionComponent {
 
   onSearchChange(value: Event) {
     const input = value.target as HTMLInputElement;
+    console.log(input.value);
+
     this.filterService.searchField.set(input.value);
   }
 

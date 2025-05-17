@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FindersServiceService } from '../service/finders-service.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service';
 import { RegistrationService } from 'src/app/modules/public/registration/registration.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { users } from 'src/app/shared/utils/users';
 
 @Component({
   selector: 'app-finders-list',
@@ -47,16 +49,37 @@ export class FindersListComponent implements OnInit {
   userSelected: any = <any>{};
   searchTerm: any;
   filteredRegistrations: any[] = [];
-  type: string ='';
+  type: string = '';
 
   constructor(
     private _findersService: FindersServiceService,
     private _snackService: SnackbarService,
-    private _registrationService: RegistrationService
+    private _registrationService: RegistrationService,
+    private _auth: AuthService
   ) {}
 
   modalAberto = false;
   modalAbertoMudar = false;
+
+  adicionar() {
+    for (let i = 0; i < users.length; i++) {
+      //  this._findersService.create({
+      //       numeroInscricao: i + 1,
+      //       stt: 4,
+      //       login: users[i].email,
+      //     });
+      this._auth
+        .RegisterWithEmailAndPassword(users[i].email, users[i].password)
+        .then((res: any) => {
+          console.log(res);
+
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    }
+
+  }
 
   setModal(user: any) {
     console.log(user);
@@ -70,15 +93,14 @@ export class FindersListComponent implements OnInit {
   abrirModal() {
     this.modalAberto = true;
   }
-  abrirModalMudar(type:string) {
+  abrirModalMudar(type: string) {
     this.modalAbertoMudar = true;
-    if(type == 'pai') {
-      this.type = "Pai adotivo";
-    } else if(type == 'mae') {
-      this.type = "Mãe adotiva";
-    }
-    else if(type == 'responsavel') {
-      this.type = "Responsável";
+    if (type == 'pai') {
+      this.type = 'Pai adotivo';
+    } else if (type == 'mae') {
+      this.type = 'Mãe adotiva';
+    } else if (type == 'responsavel') {
+      this.type = 'Responsável';
     }
   }
 
@@ -95,13 +117,14 @@ export class FindersListComponent implements OnInit {
         .map((item: any) => {
           return {
             ...item,
-            responsavelTable: item.responsavel?.nome,
+            responsavelTable: item.responsaveis?.[0].nome,
             numeroInscricao: String(item.numeroInscricao).padStart(4, '0'),
           };
         })
         .sort((a: any, b: any) =>
           a.numeroInscricao.localeCompare(b.numeroInscricao)
         );
+      this.dataSource.originalItems = this.dataSource.items;
     });
 
     this._registrationService.read().subscribe((res: any) => {
@@ -109,19 +132,26 @@ export class FindersListComponent implements OnInit {
         .filter((item: any) => item.stt === 2 || item.stt === 3)
         .map((item: any) => {
           return {
-        ...item,
-        numeroInscricao: String(item.numeroInscricao).padStart(4, '0'),
-        avatar: {
-          nome: item.nome,
-          cel: `(${item.cel.replace(/[^0-9]/g, '').slice(0, 2)}) ${item.cel.replace(/[^0-9]/g, '').slice(2, 6)}-${item.cel.replace(/[^0-9]/g, '').slice(6)}`,
-        },
-        cpf: item.cpf.replace(/[^0-9]/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'),
+            ...item,
+            numeroInscricao: String(item.numeroInscricao).padStart(4, '0'),
+            avatar: {
+              nome: item.nome,
+              cel: `(${item.cel.replace(/[^0-9]/g, '').slice(0, 2)}) ${item.cel
+                .replace(/[^0-9]/g, '')
+                .slice(2, 6)}-${item.cel.replace(/[^0-9]/g, '').slice(6)}`,
+            },
+            cpf: item.cpf
+              .replace(/[^0-9]/g, '')
+              .replace(/(\d{3})(\d)/, '$1.$2')
+              .replace(/(\d{3})(\d)/, '$1.$2')
+              .replace(/(\d{3})(\d{1,2})$/, '$1-$2'),
           };
         })
-        .sort((a: any, b: any) => a.numeroInscricao.localeCompare(b.numeroInscricao));
+        .sort((a: any, b: any) =>
+          a.numeroInscricao.localeCompare(b.numeroInscricao)
+        );
       this.filteredRegistrations = this.registrations; // Initialize filteredRegistrations
       this.filterRegistrations(); // Call the filter method to initialize the filtered list
-
     });
   }
 
@@ -267,34 +297,45 @@ input, textarea {
   selectRegistration(registration: any): void {
     console.log('Selected registration:', registration);
     if (this.type == 'Pai adotivo') {
-      this._findersService.update(this.userSelected.id, { pai: registration }).then((res: any) => {
-        this._snackService.openSnackBar(
-          'Pai aditivo atualizado com sucesso!',
-          'success'
-        );
-        this.userSelected =  {...this.userSelected, pai: registration };
-        this.fecharModalMudar();
-      });
-    }
-    else if (this.type == 'Mãe adotiva') {
-      this._findersService.update(this.userSelected.id, { mae: registration }).then((res: any) => {
-        this._snackService.openSnackBar(
-          'Mãe adotiva atualizado com sucesso!',
-          'success'
-        );
-        this.userSelected =  {...this.userSelected, mae: registration };
-        this.fecharModalMudar();
-      });
-    }
-    else if (this.type == 'Responsável') {
-      this._findersService.update(this.userSelected.id, { responsavel: registration }).then((res: any) => {
-        this._snackService.openSnackBar(
-          'Responsável atualizado com sucesso!',
-          'success'
-        );
-        this.userSelected =  {...this.userSelected, responsavel: registration };
-        this.fecharModalMudar();
-      });
+      this._findersService
+        .update(this.userSelected.id, { pai: registration })
+        .then((res: any) => {
+          this._snackService.openSnackBar(
+            'Pai aditivo atualizado com sucesso!',
+            'success'
+          );
+          this.userSelected = { ...this.userSelected, pai: registration };
+          this.fecharModalMudar();
+        });
+    } else if (this.type == 'Mãe adotiva') {
+      this._findersService
+        .update(this.userSelected.id, { mae: registration })
+        .then((res: any) => {
+          this._snackService.openSnackBar(
+            'Mãe adotiva atualizado com sucesso!',
+            'success'
+          );
+          this.userSelected = { ...this.userSelected, mae: registration };
+          this.fecharModalMudar();
+        });
+    } else if (this.type == 'Responsável') {
+      const updatedResponsaveis = this.userSelected.responsaveis
+        ? [registration, ...this.userSelected.responsaveis]
+        : [registration];
+
+      this._findersService
+        .update(this.userSelected.id, { responsaveis: updatedResponsaveis })
+        .then((res: any) => {
+          this._snackService.openSnackBar(
+            'Responsável adicionado com sucesso!',
+            'success'
+          );
+          this.userSelected = {
+            ...this.userSelected,
+            responsaveis: updatedResponsaveis,
+          };
+          this.fecharModalMudar();
+        });
     }
   }
 }

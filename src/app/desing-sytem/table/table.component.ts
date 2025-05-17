@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   Component,
   computed,
+  effect,
   EventEmitter,
   Input,
   OnChanges,
@@ -60,6 +61,8 @@ export class TableComponent implements OnInit, OnChanges {
 
   filtrados: any[] = [];
 
+  originalItens: any[] = [];
+
   handelPagination(e: PageEvent) {
     this.pageFired.emit(e);
   }
@@ -80,6 +83,9 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+
+
+
     this.filtrados = this.dataSource.items.map((item: any) => {
       const novoItem: any = {};
       if (item.avatar) {
@@ -98,7 +104,24 @@ export class TableComponent implements OnInit, OnChanges {
     private http: HttpClient,
     private filterService: TableFilterService,
     private _formBuilder: FormBuilder,
-  ) {}
+  ) {
+    effect(() => {
+      const search = this.filterService.searchField().toLowerCase();
+      if (!search) {
+        this.dataSource.items = [...this.dataSource.originalItems]; // Assuming originalItems holds all the original data
+      } else {
+        this.dataSource.items = this.dataSource?.originalItems?.filter((item: any) => {
+          return (
+        item?.avatar?.nome?.toLowerCase().includes(search) ||
+        item?.numeroInscricao?.toString().toLowerCase().includes(search) ||
+        item?.cracha?.toLowerCase().includes(search) ||
+        item?.nome?.toLowerCase().includes(search)
+          );
+        });
+      }
+       console.log('tes =>', this.filterService.searchField().toLowerCase());
+    });
+  }
 
   public toggleUsers(checked: boolean) {
     this.users.update((users) => {
@@ -126,11 +149,14 @@ export class TableComponent implements OnInit, OnChanges {
     const status = this.filterService.statusField();
     const order = this.filterService.orderField();
 
-    return this.users().filter(
-      (user) =>
-        user?.nome?.toLowerCase().includes(search) ||
-        user?.cracha?.toLowerCase().includes(search)
-    );
+    console.log('search', search);
+
+
+    // return this.users().filter(
+    //   (user) =>
+    //     user?.nome?.toLowerCase().includes(search) ||
+    //     user?.cracha?.toLowerCase().includes(search)
+    // );
     // .filter((user) => {
     //   if (!status) return true;
     //   switch (status) {
@@ -171,9 +197,11 @@ export class TableComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.displayToColumns = this.columns;
+    this.originalItens = this.dataSource.items
 
     this.filterService.searchField.set('');
     this.filterService.statusField.set('');
     this.filterService.orderField.set('1');
+
   }
 }
