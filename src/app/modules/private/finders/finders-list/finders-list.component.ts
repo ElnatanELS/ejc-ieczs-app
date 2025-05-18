@@ -63,20 +63,20 @@ export class FindersListComponent implements OnInit {
 
   adicionar() {
     for (let i = 0; i < users.length; i++) {
-      //  this._findersService.create({
-      //       numeroInscricao: i + 1,
-      //       stt: 4,
-      //       login: users[i].email,
-      //     });
-      this._auth
-        .RegisterWithEmailAndPassword(users[i].email, users[i].password)
-        .then((res: any) => {
-          console.log(res);
+       this._findersService.create({
+            numeroInscricao: i + 1,
+            stt: 4,
+            login: users[i].email,
+          });
+      // this._auth
+      //   .RegisterWithEmailAndPassword(users[i].email, users[i].password)
+      //   .then((res: any) => {
+      //     console.log(res);
 
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+      //   })
+      //   .catch((err: any) => {
+      //     console.log(err);
+      //   });
     }
 
   }
