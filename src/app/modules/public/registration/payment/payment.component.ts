@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   pagamento: any = {};
 
   item: any = {
-    preco: 100,
+    preco: 2500,
     descricao: 'Inscrição para o EJC',
     id: 1,
   };
