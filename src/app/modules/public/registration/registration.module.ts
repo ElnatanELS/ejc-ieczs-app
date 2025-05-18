@@ -17,6 +17,7 @@ import { RegistrationRoutingModule } from './registration-routing.module';
 import { RegistrationComponent } from './registration.component';
 import { RegistrationService } from './registration.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ModalModule } from 'src/app/shared/components/modal/modal.module';
 
 @NgModule({
 
@@ -33,7 +34,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     EelsSelectModule,
     ChipsModule,
     MatProgressSpinnerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ModalModule
 ],
   declarations: [RegistrationComponent, FirstAcessRegistrationComponent, PaymentComponent, ConfirmationComponent],
   providers: [RegistrationService,SnackbarService],

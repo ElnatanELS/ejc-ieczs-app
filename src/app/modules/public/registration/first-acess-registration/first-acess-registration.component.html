@@ -83,6 +83,15 @@
          <mat-hint>coloque de preferencia o @ do instagram, se não tiver coloque 'Não tenho'</mat-hint>
 
       </div>
+      <div class="my-4">
+    <label class="inline-flex items-start space-x-2">
+      <input type="checkbox" formControlName="termo" class="mt-1">
+      <span>
+        Li e concordo com os termos da
+        <a (click)="abrirModal()" class="text-blue-600 underline">Política de Privacidade</a> e autorizo o tratamento dos meus dados conforme a LGPD.
+      </span>
+    </label>
+  </div>
 
     </ng-container>
 
@@ -101,3 +110,93 @@
       <span class="text-primary_color/50 font-bold">Entrar</span></a
     > -->
 </div>
+
+
+<app-modal
+  [isOpen]="modalAberto"
+  title="Termo de Consentimento para Tratamento de Dados Pessoais – LGPD"
+  (closed)="fecharModal()"
+  class="max-w-3xl h-[80%] overflow-y-auto"
+>
+ <section class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-xl text-gray-800 text-sm leading-relaxed">
+  <h1 class="text-2xl font-bold mb-4">Termo de Consentimento para Tratamento de Dados Pessoais – LGPD</h1>
+
+  <p class="mb-4">
+    Este Termo visa registrar a manifestação livre, informada e inequívoca pela qual o(a) TITULAR dos dados autoriza o site <strong>IGREJA CONGREGACIONAL ZONA SUL</strong>, inscrito sob o CNPJ nº <strong>40.213.291/0001-10</strong>, com sede em <strong>R. Minas Gerais, 420 - Liberdade, Campina Grande - PB, 58414-010</strong>, a realizar o tratamento de seus dados pessoais, conforme os termos da Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais – LGPD).
+  </p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">1. Dados Pessoais Coletados</h2>
+  <ul class="list-disc list-inside mb-4">
+    <li>Nome completo</li>
+    <li>E-mail</li>
+    <li>Número de telefone</li>
+    <li>Data de nascimento (se aplicável)</li>
+    <li>Endereço IP e dados de geolocalização</li>
+    <li>Informações de navegação (cookies, páginas visitadas, tempo de permanência etc.)</li>
+    <li>Outros dados fornecidos voluntariamente pelo usuário</li>
+  </ul>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">2. Finalidade do Tratamento</h2>
+  <ul class="list-disc list-inside mb-4">
+    <li>Identificação e autenticação do usuário</li>
+    <li>Personalização da experiência e conteúdo</li>
+    <li>Envio de comunicações promocionais e informativas</li>
+    <li>Aprimoramento de produtos, serviços e funcionalidades</li>
+    <li>Cumprimento de obrigações legais e contratuais</li>
+  </ul>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">3. Compartilhamento de Dados</h2>
+  <p class="mb-4">
+    Os dados poderão ser compartilhados com prestadores de serviços tecnológicos, parceiros comerciais e autoridades públicas, quando necessário e conforme a legislação vigente.
+  </p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">4. Armazenamento e Segurança</h2>
+  <p class="mb-4">
+    Os dados serão armazenados em servidores seguros, com o uso de medidas técnicas e administrativas para proteger contra acessos não autorizados.
+  </p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">5. Retenção dos Dados</h2>
+  <p class="mb-4">
+    Os dados serão mantidos apenas pelo tempo necessário para cumprir as finalidades previstas neste termo ou conforme exigido por lei.
+  </p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">6. Direitos do Titular</h2>
+  <p class="mb-4">
+    O titular poderá, a qualquer momento, solicitar:
+  </p>
+  <ul class="list-disc list-inside mb-4">
+    <li>Confirmação da existência de tratamento</li>
+    <li>Acesso aos dados</li>
+    <li>Correção de dados incompletos ou desatualizados</li>
+    <li>Anonimização, bloqueio ou eliminação</li>
+    <li>Portabilidade dos dados</li>
+    <li>Revogação do consentimento</li>
+  </ul>
+
+  <p class="mb-4">
+    As solicitações devem ser feitas através do canal: <strong>[inserir e-mail ou link para formulário]</strong>.
+  </p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">7. Revogação do Consentimento</h2>
+  <p class="mb-4">
+    O consentimento poderá ser revogado a qualquer momento, ciente de que isso poderá limitar o uso de certas funcionalidades ou serviços.
+  </p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">8. Atualizações</h2>
+  <p class="mb-6">
+    Este termo poderá ser alterado a qualquer momento. As alterações estarão disponíveis nesta mesma página.
+  </p>
+
+  <!-- <label class="flex items-start space-x-2 mb-4">
+    <input type="checkbox" required class="mt-1">
+    <span>
+      Declaro que li, compreendi e concordo com os termos acima e autorizo o tratamento dos meus dados pessoais conforme a LGPD.
+    </span>
+  </label>
+
+  <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
+    Aceitar e continuar
+  </button> -->
+</section>
+
+</app-modal>

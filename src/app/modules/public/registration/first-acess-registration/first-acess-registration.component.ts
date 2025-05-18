@@ -34,6 +34,7 @@ export class FirstAcessRegistrationComponent implements OnInit {
     cel: [''],
     equipe: [''],
     redeSocial: [''],
+    termo: [false],
   });
 
   loading = false;
@@ -77,6 +78,7 @@ export class FirstAcessRegistrationComponent implements OnInit {
       this.form.controls.email.setValidators([Validators.required, Validators.email]);
       this.form.controls.equipe.setValidators([Validators.required]);
       this.form.controls.redeSocial.setValidators([Validators.required]);
+      this.form.controls.termo.setValidators( [Validators.requiredTrue]);
       this._registrationService
         .filterCpf(String(this.form.controls.cpf.value).trim())
         .subscribe((res: any) => {
@@ -137,5 +139,14 @@ export class FirstAcessRegistrationComponent implements OnInit {
         })
 
     }
+  }
+
+  modalAberto = false;
+ abrirModal() {
+    this.modalAberto = true;
+  }
+
+  fecharModal() {
+    this.modalAberto = false;
   }
 }
