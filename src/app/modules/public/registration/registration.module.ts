@@ -9,12 +9,14 @@ import { EelsProgressBarModule } from 'src/app/desing-sytem/progress-bar/eels-pr
 import { ChipsModule } from 'src/app/shared/components/chips/chips.module';
 import { SnackbarService } from 'src/app/shared/services/snackbar/snackbar.service';
 import { EelsSelectModule } from "../../../desing-sytem/inputs/eels-select/eels-select.module";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { FirstAcessRegistrationComponent } from './first-acess-registration/first-acess-registration.component';
 import { PaymentComponent } from './payment/payment.component';
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { RegistrationComponent } from './registration.component';
 import { RegistrationService } from './registration.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
 
@@ -29,7 +31,9 @@ import { RegistrationService } from './registration.service';
     MatSnackBarModule,
     EelsProgressBarModule,
     EelsSelectModule,
-    ChipsModule
+    ChipsModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule
 ],
   declarations: [RegistrationComponent, FirstAcessRegistrationComponent, PaymentComponent, ConfirmationComponent],
   providers: [RegistrationService,SnackbarService],

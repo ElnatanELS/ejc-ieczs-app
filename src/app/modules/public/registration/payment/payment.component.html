@@ -6,7 +6,8 @@
     Realize seu <span class="text-primary_color/50">Pagamento</span> via pix, se quiser pagar no dinheiro vá na mesa de incrição.
   </h1>
 
-  <div class="relative  mt-3  w-full grid justify-center">
+  <mat-spinner *ngIf="loadingPix"></mat-spinner>
+  <div  *ngIf="!loadingPix" class="relative  mt-3  w-full grid justify-center">
     <img [src]="pagamento.qrCode" class="m-3" alt="" />
     <div class=" bottom-0 flex flex-col items-center">
       <p

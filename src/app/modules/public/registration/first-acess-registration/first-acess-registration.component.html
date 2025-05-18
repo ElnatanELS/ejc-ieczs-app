@@ -74,17 +74,19 @@
           [controlForm]="form.controls.equipe"
         ></eels-select>
       </div>
-      <div class="relative mt-2 w-full">
+      <div class="relative mt-2 mb-4 w-full">
         <eels-input
           label="Rede Social"
           typeInput="text"
           [controlForm]="form.controls.redeSocial"
         ></eels-input>
+         <mat-hint>coloque de preferencia o @ do instagram, se não tiver coloque 'Não tenho'</mat-hint>
+
       </div>
 
     </ng-container>
 
-    <eels-progress-bar *ngIf="loading"></eels-progress-bar>
+    <eels-progress-bar  *ngIf="loading"></eels-progress-bar>
     <eels-button
       [text]="hasCpf ? buttonText2 : buttonText"
       [isDisabled]="form.invalid"
