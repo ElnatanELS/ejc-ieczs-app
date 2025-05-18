@@ -39,30 +39,40 @@ export class PaymentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadingPix = true;
     this.inscricao = this._localStore.get('USER');
-    this._registrationService.filterCpf(this.inscricao.data.cpf).subscribe((res: any) => {
-      if ( res[0]) {
-        console.log('entrou',res[0]);
-
+    this.subscription = this._registrationService
+      .filterCpf(this.inscricao.data.cpf)
+      .subscribe((res: any) => {
+      if (res[0]) {
+        console.log('entrou', res[0]);
+         this._localStore.set('USER', {
+          id: res[0]?.id,
+          data: res[0],
+        });
 
         if (!res[0].pagamento) {
+        this.gerarPix();
 
-          this.gerarPix();
+        } else {
+        this.pagamento = res[0].pagamento;
+        //  this.iniciarContador();
+        this.loadingPix = false;
         }
         if (!res[0].id) {
-          this.router.navigate(['/']);
+        this.router.navigate(['/']);
         }
         if (res[0].stt == 2 || res[0].stt == 3) {
-          this.router.navigate(['/inscricao/confirmacao']);
+        this.router.navigate(['/inscricao/confirmacao']);
         }
 
-        if (res[0].pagamento.status === 'paid') {
-              this._snackBarService.openSnackBar(
-                'Pagamento confirmado!',
-                'success'
-              );
-              this.goToRegistration();}
+        if (res[0].pagamento?.status === 'paid') {
+        this._snackBarService.openSnackBar(
+          'Pagamento confirmado!',
+          'success'
+        );
+        this.goToRegistration();
+        }
       }
-    })
+      });
   }
   ngOnDestroy(): void {
     console.log('Destruindo componente de pagamento');
@@ -70,34 +80,36 @@ export class PaymentComponent implements OnInit, OnDestroy {
     this._localStore.remove('USER');
 
     this.subscription?.unsubscribe();
+    // if (this.intervalId) {
+    //   clearInterval(this.intervalId);
+    // }
   }
 
-   statusNaoPago = true;
+  statusNaoPago = true;
 
   validarStatus() {
-   this._registrationService
-        .getPaymentStatus(this.inscricao.data.pagamento.id).pipe(take(1))
-        .subscribe(
-          (res: any) => {
-            this.loadingPix = false;
-            const status = res.charges[0].last_transaction.status;
-            if (status === 'paid') {
-              this._snackBarService.openSnackBar(
-                'Pagamento confirmado!',
-                'success'
-              );
-              this.goToRegistration();
-            } else if (
-              status === 'waiting_payment'
-            ) {
-              console.log('Pagamento pendente, verificando novamente...');
-              setTimeout(() => this.validarStatus(), 5000);
-            }
-          },
-          (err) => {
-            console.error('Erro ao verificar status do pagamento:', err);
+    this._registrationService
+      .getPaymentStatus(this.inscricao.data.pagamento.id)
+      .pipe(take(1))
+      .subscribe(
+        (res: any) => {
+          this.loadingPix = false;
+          const status = res.charges[0].last_transaction.status;
+          if (status === 'paid') {
+            this._snackBarService.openSnackBar(
+              'Pagamento confirmado!',
+              'success'
+            );
+            this.goToRegistration();
+          } else if (status === 'waiting_payment') {
+            console.log('Pagamento pendente, verificando novamente...');
+            setTimeout(() => this.validarStatus(), 5000);
           }
-        );
+        },
+        (err) => {
+          console.error('Erro ao verificar status do pagamento:', err);
+        }
+      );
   }
   goToRegistration() {
     const status = {
@@ -133,24 +145,51 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   gerarPix() {
     this.loadingPix = true;
-   this._registrationService
-        .gerarPix(this.inscricao, this.item)
-        .subscribe((res: any) => {
-          console.log(res);
-          this.pagamento = {
-            id: res.id,
-            qrCode: res.charges[0].last_transaction.qr_code_url,
-            link: res.charges[0].last_transaction.qr_code,
-            status: res.charges[0].last_transaction.status,
-          };
-          this.inscricao.data.pagamento = this.pagamento;
-          this.loadingPix = false;
-          this._registrationService
-            .update(this.inscricao.id, { pagamento: this.pagamento })
-            .then((res: any) => {
-              console.log(res);
-            });
-          // this.validarStatus();
-        });
+    this._registrationService
+      .gerarPix(this.inscricao, this.item)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.pagamento = {
+          id: res.id,
+          qrCode: res.charges[0].last_transaction.qr_code_url,
+          link: res.charges[0].last_transaction.qr_code,
+          status: res.charges[0].last_transaction.status,
+        };
+        //  this.iniciarContador();
+        this.inscricao.data.pagamento = this.pagamento;
+        this.loadingPix = false;
+        this._registrationService
+          .update(this.inscricao.id, { pagamento: this.pagamento })
+          .then((res: any) => {
+            console.log(res);
+          });
+      });
   }
+
+  // contador: number = 600;
+  // intervalId: any;
+
+  // minutes: number = Math.floor(this.contador / 60);
+  // seconds: number = this.contador % 60;
+  // formatTime(time: number): string {
+  //   return time < 10 ? `0${time}` : `${time}`;
+  // }
+  // iniciarContador() {
+  //   this.contador = 600;
+  //   this.intervalId = setInterval(() => {
+  //     if (this.contador > 0) {
+  //       this.contador--;
+  //     } else {
+  //       clearInterval(this.intervalId);
+  //       this._snackBarService.openSnackBar(
+  //         'Tempo expirado! Gere um novo código Pix.',
+  //         'warning'
+  //       );
+  //     }
+  //   }, 1000);
+  // }
+
+
+
+
 }

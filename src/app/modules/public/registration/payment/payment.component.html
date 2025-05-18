@@ -8,7 +8,10 @@
 
   <mat-spinner *ngIf="loadingPix"></mat-spinner>
   <div  *ngIf="!loadingPix" class="relative  mt-3  w-full grid justify-center">
-    <img [src]="pagamento.qrCode" class="m-3" alt="" />
+    <div class="flex justify-center">
+
+      <img [src]="pagamento.qrCode" class="m-3" alt="" />
+    </div>
     <div class=" bottom-0 flex flex-col items-center">
       <p
         class="border border-gray-300 rounded-md p-2 text-center"
@@ -20,6 +23,11 @@
         Copiar Código
       </button>
     </div>
+    <!-- <div class="flex justify-center">
+      <span class="text-lg font-semibold text-red-600">
+        Tempo restante: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}
+      </span>
+    </div> -->
   </div>
   <div class="relative mt-2 w-full flex justify-center">
     <eels-progress-bar *ngIf="loading"></eels-progress-bar>
