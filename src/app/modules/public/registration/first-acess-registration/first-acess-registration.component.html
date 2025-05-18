@@ -85,11 +85,11 @@
       </div>
       <div class="my-4">
     <label class="inline-flex items-start space-x-2">
-      <input type="checkbox" formControlName="termo" class="mt-1">
-      <span>
+      <mat-checkbox class="example-margin" [formControl]="form.controls.termo" > <span>
         Li e concordo com os termos da
         <a (click)="abrirModal()" class="text-blue-600 underline">Política de Privacidade</a> e autorizo o tratamento dos meus dados conforme a LGPD.
-      </span>
+      </span></mat-checkbox>
+
     </label>
   </div>
 
