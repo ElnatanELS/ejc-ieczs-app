@@ -1,27 +1,34 @@
 <div class="min-h-screen flex flex-col items-center justify-center gap-6 bg-gray-100 text-center p-6">
-  <button
-    class="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+  <eels-button
+    class="px-6 py-3  text-white rounded-xl transition"
+     [class]="loading ? '!h-24 !w-56 !bg-red-600' : '!h-24 !w-56 ' "
     (click)="sortear()"
+    [isDisabled]="loading"
+    text=" Sortear Nome"
   >
-    Sortear Nome
-  </button>
+
+  </eels-button>
 
   <div *ngIf="vencedor">
     Último sorteado: <strong>{{ vencedor.nome }} / {{ vencedor.numeroInscricao }}</strong><br />
     Restam <strong>{{ faltam }}</strong> {{ faltam === 1 ? 'nome' : 'nomes' }}
   </div>
 
-  <div class="w-full max-w-2xl bg-white shadow-md rounded-lg p-4">
-    <h2 class="text-lg font-bold mb-4">Últimos  nomes chamados</h2>
-    <ul class="list-disc list-inside">
-      <li *ngFor="let nome of ultimosNomes">{{ nome.nome }} / {{ nome.numeroInscricao }}</li>
-    </ul>
-  </div>
+  <div class="flex w-full items-center justify-center gap-4">
 
-  <div class="w-full max-w-2xl bg-white shadow-md rounded-lg p-4 mt-4">
-    <h2 class="text-lg font-bold mb-4">Estatísticas</h2>
-    <p>Quantidade: <strong>{{ _raffleService.maxSorteios() }}</strong></p>
-    <p>Total chamados: <strong>{{ ultimosNomes.length }}</strong></p>
-    <p>Restantes: <strong>{{ faltam }}</strong></p>
+    <div class="w-full max-w-2xl bg-white shadow-md rounded-lg p-4 h-96 overflow-auto">
+      <h2 class="text-lg font-bold mb-4">Últimos  nomes chamados</h2>
+      <ul class="list-disc list-inside">
+        <li *ngFor="let nome of ultimosNomes">{{ nome.nome }} / {{ nome.numeroInscricao }}</li>
+      </ul>
+    </div>
+
+    <div class="w-full max-w-2xl bg-white shadow-md rounded-lg p-4 mt-4">
+      <h2 class="text-lg font-bold mb-4">Estatísticas</h2>
+      <p>Quantidade: <strong>{{maxSorteios}}</strong></p>
+      <p>Total chamados: <strong>{{ ultimosNomes.length }}</strong></p>
+      <p>Restantes: <strong>{{ faltam }}</strong></p>
+    </div>
+
   </div>
 </div>

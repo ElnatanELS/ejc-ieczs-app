@@ -9,7 +9,7 @@
     </div>
   <h1 class="text-4xl font-bold text-green-900 mb-6 animate-fade-in mb-9">Resultado do Sorteio</h1>
 
-  <div *ngIf="loading" class="text-5xl font-mono font-bold animate-pulse text-gray-700">
+  <div *ngIf="loading" class="text-[100px] font-mono font-bold animate-pulse text-gray-700">
     {{ efeito }}
   </div>
 
@@ -26,7 +26,7 @@
   <div class="flex w-[80%]  items-center justify-between mt-8">
 
     <div *ngIf="vencedor" class="mt-4 text-lg text-gray-700 grid text-center w-[80%] ">
-      Restam <span class="font-bold text-[60px] text-green-800 my-2">{{ faltam }} / {{total}}</span> {{ faltam === 1 ? 'nome' : 'nomes' }} para serem sorteados.
+      Foram sorteados <span class="font-bold text-[60px] text-green-800 my-2">{{ faltam }} / {{total}}</span> {{ faltam === 1 ? 'ficha' : 'fichas' }}.
     </div>
     <div *ngIf="ultimosNomes.length > 1 && !loading && vencedor" class="mt-8 w-full max-w-2xl max-h-64 overflow-auto">
       <h2 class="text-2x1 font-semibold text-gray-800 mb-4">Últimos  nomes chamados:</h2>

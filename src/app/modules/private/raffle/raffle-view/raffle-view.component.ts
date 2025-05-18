@@ -17,10 +17,16 @@ export class RaffleViewComponent implements OnInit {
   total:number = 0;
   ultimosNomes: any[] = [];
 
+   maxSorteios = 0;
+
   constructor(private _raffleService:RaffleService) {}
 
   ngOnInit(): void {
     this.sorteio$ = this._raffleService.getUltimoResultado();
+
+     this._raffleService.getTotalSorteios().subscribe((total) => {
+      this.maxSorteios = total;
+    });
 
     this.sorteio$.subscribe(s => {
       if (s?.vencedor) {
@@ -34,8 +40,8 @@ export class RaffleViewComponent implements OnInit {
         setTimeout(() => {
           clearInterval(animInterval);
           this.vencedor = s.vencedor;
-          this.faltam = this._raffleService.maxSorteios() - s.jaSorteados.length;
-          this.total = this._raffleService.maxSorteios() ;
+          this.faltam = (s.jaSorteados.length - this.maxSorteios) +   this.maxSorteios;
+          this.total = this.maxSorteios ;
           this.efeito = null;
           this.loading = false;
         }, 2000);

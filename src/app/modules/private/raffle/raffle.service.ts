@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable, first, map, switchMap, take } from 'rxjs';
+import { Observable, first, from, map, switchMap, take, firstValueFrom } from 'rxjs';
 import { RegistrationService } from '../../public/registration/registration.service';
 import { FindersServiceService } from '../finders/service/finders-service.service';
 
@@ -25,6 +25,9 @@ export class RaffleService {
 
   private counterDoc = this.firestore.doc<{ numero: number }>(
     'ficha/ultimaFicha'
+  );
+  private qtdTotal = this.firestore.doc<{ numero: number }>(
+    'sorteios/qtdTotal'
   );
   constructor(private firestore: AngularFirestore, private _registrationService: RegistrationService,
     private _findersService: FindersServiceService
@@ -115,7 +118,8 @@ export class RaffleService {
     const jaSorteados = ultimo?.jaSorteados || [];
 
     // 🔒 Verifica se o limite foi atingido
-    if (jaSorteados.length >= this.maxSorteios()) {
+    const totalSorteios = await firstValueFrom(this.getTotalSorteios());
+    if (jaSorteados.length >= totalSorteios) {
       throw new Error(`Limite de ${this.maxSorteios()} sorteios atingido.`);
     }
     console.log('jaSorteados', jaSorteados);
@@ -160,6 +164,18 @@ export class RaffleService {
       return snapshot.docs[0].data() as Sorteio;
     }
     return null;
+  }
+
+  getTotalSorteios(): Observable<number> {
+    return this.qtdTotal.valueChanges().pipe(
+      map((res) => {
+        return res?.numero ?? 0;
+      })
+    );
+  }
+
+  setTotalSorteios(qtd: number): Observable<void> {
+    return from(this.qtdTotal.update({ numero: qtd }));
   }
 
 }

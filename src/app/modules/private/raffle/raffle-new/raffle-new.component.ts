@@ -11,27 +11,37 @@ export class RaffleNewComponent implements OnInit {
 
   vencedor: any | null = null;
   faltam = 0;
+  loading=false
 
   ultimosNomes: any[] = [];
   maxSorteios = 0;
 
   ngOnInit(): void {
-    this.maxSorteios = this._raffleService.maxSorteios();
+    this._raffleService.getTotalSorteios().subscribe((total) => {
+      this.maxSorteios = total;
+       this.faltam = this.maxSorteios - this.ultimosNomes.length   ;
+    });
 
     this._raffleService.getUltimoResultado().subscribe((s) => {
       if (s) {
         this.vencedor = s.vencedor;
         console.log(s);
         this.ultimosNomes = s.jaSorteados.sort((a: any, b: any) => s.jaSorteados.indexOf(b) - s.jaSorteados.indexOf(a));
-        this.maxSorteios = this._raffleService.maxSorteios();
 
-        this.faltam = this._raffleService.maxSorteios() - s.jaSorteados.length;
+        this.faltam = this.maxSorteios - s.jaSorteados.length   ;
       }
     });
   }
 
   async sortear() {
     try {
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+        console.log('loading', this.loading);
+
+      }, 3000);
+      console.log('loading', this.loading);
       await this._raffleService.sortear();
     } catch (error) {}
   }

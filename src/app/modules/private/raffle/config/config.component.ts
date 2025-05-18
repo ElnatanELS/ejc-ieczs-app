@@ -28,8 +28,7 @@ export class ConfigComponent implements OnInit {
 
    create(){
     if(this.form.valid){
-      this.raffleService.maxSorteios.set(Number(this.form.value.numero));
-      console.log('tes', this.raffleService.maxSorteios() );
+      this.raffleService.setTotalSorteios(Number(this.form.value.numero));
 
     } else {
       console.log('formulario invalido')
