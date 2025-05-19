@@ -29,6 +29,8 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   subscription: any;
 
+  esperarGerarPix = false;
+
   constructor(
     public router: Router,
     private _localStore: LocalStorageService,
@@ -43,17 +45,25 @@ export class PaymentComponent implements OnInit, OnDestroy {
       .filterCpf(this.inscricao.data.cpf)
       .subscribe((res: any) => {
       if (res[0]) {
-        console.log('entrou', res[0]);
          this._localStore.set('USER', {
           id: res[0]?.id,
           data: res[0],
         });
 
-        if (!res[0].pagamento) {
+        if (!res[0].pagamento && !this.esperarGerarPix) {
         this.gerarPix();
+
 
         } else {
         this.pagamento = res[0].pagamento;
+
+        if ( new Date(this.pagamento.expires_at) < new Date()) {
+          this._snackBarService.openSnackBar(
+            'Código expirado! vamos gerar umnovo.',
+            'warning'
+          );
+          this.gerarPix();
+        }
         //  this.iniciarContador();
         this.loadingPix = false;
         }
@@ -145,8 +155,10 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   gerarPix() {
     this.loadingPix = true;
+    this.esperarGerarPix = true;
+
     this._registrationService
-      .gerarPix(this.inscricao, this.item)
+      .gerarPix(this.inscricao, this.item).pipe(take(1))
       .subscribe((res: any) => {
         console.log(res);
         this.pagamento = {
@@ -154,6 +166,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
           qrCode: res.charges[0].last_transaction.qr_code_url,
           link: res.charges[0].last_transaction.qr_code,
           status: res.charges[0].last_transaction.status,
+          expires_at: res.charges[0].last_transaction.expires_at,
         };
         //  this.iniciarContador();
         this.inscricao.data.pagamento = this.pagamento;
@@ -161,6 +174,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
         this._registrationService
           .update(this.inscricao.id, { pagamento: this.pagamento })
           .then((res: any) => {
+            this.loadingPix = false;
             console.log(res);
           });
       });

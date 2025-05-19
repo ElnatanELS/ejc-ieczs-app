@@ -3,10 +3,12 @@
       Olá <span class="text-primary_color/50">{{inscricao?.data?.cracha}}!</span>
     </h1>
   <h1 class="text-base text-center font-bold text-neutral-900">
-    Realize seu <span class="text-primary_color/50">Pagamento</span> via pix, se quiser pagar no dinheiro vá na mesa de incrição.
+    Realize seu <span class="text-primary_color/50">Pagamento</span> via pix, se quiser pagar no dinheiro vá na mesa de incrição. o valor é de <span class="text-primary_color/50">R$ 25,00</span>.
   </h1>
 
-  <mat-spinner *ngIf="loadingPix"></mat-spinner>
+  <mat-spinner *ngIf="loadingPix">
+    aguardando gerar pix...
+  </mat-spinner>
   <div  *ngIf="!loadingPix" class="relative  mt-3  w-full grid justify-center">
     <div class="flex justify-center">
 

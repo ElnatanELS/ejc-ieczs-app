@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -11,10 +11,11 @@ import { RegistrationService } from '../registration.service';
   templateUrl: './first-acess-registration.component.html',
   styleUrls: ['./first-acess-registration.component.css'],
 })
-export class FirstAcessRegistrationComponent implements OnInit {
+export class FirstAcessRegistrationComponent implements OnInit, OnDestroy {
   hasCpf = false;
   buttonText = 'Validar Inscrição';
   buttonText2 = 'Fazer Inscrição';
+  subscription: any;
   constructor(
     private _formBuilder: FormBuilder,
     private _auth: AuthService,
@@ -23,6 +24,7 @@ export class FirstAcessRegistrationComponent implements OnInit {
     private _localStore: LocalStorageService,
     private _registrationService: RegistrationService
   ) {}
+
 
   form = this._formBuilder.group({
     cpf: ['', [Validators.required, cpfValidator()]],
@@ -66,6 +68,10 @@ export class FirstAcessRegistrationComponent implements OnInit {
     this._localStore.clear()
   }
 
+   ngOnDestroy(): void {
+   this.subscription?.unsubscribe();
+  }
+
   validate() {
     this.loading = true;
     if (this.form.valid) {
@@ -79,10 +85,11 @@ export class FirstAcessRegistrationComponent implements OnInit {
       this.form.controls.equipe.setValidators([Validators.required]);
       this.form.controls.redeSocial.setValidators([Validators.required]);
       this.form.controls.termo.setValidators( [Validators.requiredTrue]);
-      this._registrationService
+      this.subscription = this._registrationService
         .filterCpf(String(this.form.controls.cpf.value).trim())
         .subscribe((res: any) => {
 
+          console.log('res', res);
 
           if (res[0]) {
 
