@@ -85,7 +85,7 @@ export class FirstAcessRegistrationComponent implements OnInit, OnDestroy {
       this.form.controls.equipe.setValidators([Validators.required]);
       this.form.controls.redeSocial.setValidators([Validators.required]);
       this.form.controls.termo.setValidators( [Validators.requiredTrue]);
-      this.subscription = this._registrationService
+      this._registrationService
         .filterCpf(String(this.form.controls.cpf.value).trim())
         .subscribe((res: any) => {
 
